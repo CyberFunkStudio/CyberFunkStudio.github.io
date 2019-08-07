@@ -11,4 +11,8 @@ Usually, the animation component works on an attribute directly. But since the a
 inside a gltf, with many other models and materials, we have to animate an attribute on the component, and 
 inside the component, expose the parameter we want to change and use this attribue to drive it.
 
-The tree has UVs r
+The tree has UVs running its length, and is broken into 3 models (trunk, branch, twig).
+6 different animation components are used, 3 for growth, 3 for shinking, and each assigned to the trunk, branck, twig, with a 
+bit of delay to make the sequence appear continuous.
+
+One problem, the alpha channel cannot be animated independently of the the (color texture) map, as THREEjs locks them together.
