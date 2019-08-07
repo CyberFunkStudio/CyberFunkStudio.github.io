@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hello!</title>
+    <title>uv Reveal Transparency Map Sequence</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
-    
-    <!-- import the webpage's javascript file -->
-    <script src="/script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+    <script src="matClipPlane.js"></script>
+    <script src="clickListener.js"></script>
   </head>  
+  
   <body>
-    <h1>Hi there!</h1>
-    
-    <p>
-      I'm your cool new webpage. Made with <a href="https://glitch.com">Glitch</a>!
-    </p>
+    <a-scene >
+      <a-asset>
+        <a-asset-item id="tree-gltf" src="https://cdn.glitch.com/67168196-e75b-4d1b-9851-879eb27f9d01%2FTreeTrans3.glb" ></a-asset-item>
+        <img id="gradMask" src="GradMask.jpg">
+      </a-asset>
+        
+        <a-entity id="tree" gltf-model="#tree-gltf" scale="5 5 5" 
+            animation__growA="property: matclipplane.clipHeightA; from: 0; to: 2; startEvents: grow; dur: 1000"
+            animation__growB="property: matclipplane.clipHeightB; from: 0; to: 2; startEvents: grow; dur: 1000; delay: 300"
+            animation__growC="property: matclipplane.clipHeightC; from: 0; to: 2; startEvents: grow; dur: 1000; delay: 600"
+            animation__shrinkA="property: matclipplane.clipHeightA; from: 2; to: 0; startEvents: shrink; dur: 1000; delay: 600"
+            animation__shrinkB="property: matclipplane.clipHeightB; from: 2; to: 0; startEvents: shrink; dur: 1000; delay: 300"
+            animation__shrinkC="property: matclipplane.clipHeightC; from: 2; to: 0; startEvents: shrink; dur: 1000"
+            matclipplane
+         ></a-entity>
 
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
+        <a-entity id="button" geometry="primitive: box" material="color: #335511;  metalness: 0.5" scale="0.2 0.2 0.2" class="clickable" click-listener></a-entity>
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
+
+        <a-entity id="torusKnot" geometry="primitive:torusKnot; radiusTubular: 0.025; radius: 3 " material="color:#332233; roughness: 1" rotation="90 0 0"></a-entity>
+        <a-entity id="camera" camera orbit-controls="initialPosition: 1 1 -1; target: 0 1 0; minDistance: 0"></a-entity> 
+        <a-sky color="#88ddff"></a-sky>
+        <a-entity light="type:ambient; intensity:2"></a-entity>
+        <a-entity light="type:directional; intensity: 1.5" position="3 3 0" ></a-entity>
+    </a-scene>
   </body>
+  
 </html>
