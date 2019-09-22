@@ -1,9 +1,5 @@
- AFRAME.registerComponent('matclipplane', {
-          schema:{
-            clipHeightA:{type: 'number', default: 0},
-            clipHeightB:{type: 'number', default: 0},
-            clipHeightC:{type: 'number', default: 0}
-          },
+ AFRAME.registerComponent('tree-manager', {
+         
           init: function () {
             let el = this.el;
             let comp = this;
@@ -19,7 +15,10 @@
               if (!mesh){return;}
               //console.log(mesh);
               mesh.traverse(function(node){
-                 if (node.isMesh){                   
+                 if (node.isMesh){  
+                   let mat = new THREE.MeshStandardMaterial;
+                   node.material = mat;
+                   /*
                    if (node.material.name.includes("Trunk")){
                      // console.log(node.material);
                         let mat = node.material;
@@ -33,6 +32,7 @@
                         comp.treeModels.push(node);
                        // console.log(node.name, mat.name);
                    }
+                   */
                  }
               });
               /*console.log(comp.treeModels);
@@ -41,16 +41,5 @@
               });*/            
               comp.modelLoaded = true;
             });   
-          },
-          update: function(oldData){
-            let data=this.data;
-            let el = this.el;
-            let comp = this;
-            // Set the uv offset by the incoming clipHeight attributes.
-            if (comp.modelLoaded){          
-              comp.treeModels[1].material.map.offset.y = this.data.clipHeightA;
-              comp.treeModels[2].material.map.offset.y = this.data.clipHeightB;
-              comp.treeModels[0].material.map.offset.y = this.data.clipHeightC;
-            }
           }
         });
