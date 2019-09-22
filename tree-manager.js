@@ -17,6 +17,9 @@
               mesh.traverse(function(node){
                  if (node.isMesh){  
                    let mat = new THREE.MeshStandardMaterial;
+                   let color = new THREE.Color(0xaa5511);
+                   mat.color = color;
+                   mat.wireframe = true;
                    node.material = mat;
                    /*
                    if (node.material.name.includes("Trunk")){
