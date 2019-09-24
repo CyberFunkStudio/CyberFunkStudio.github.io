@@ -1,5 +1,4 @@
- AFRAME.registerComponent('tree-manager', {
-         
+ AFRAME.registerComponent('tree-manager', {         
           init: function () {
             let el = this.el;
             let comp = this;
@@ -20,28 +19,9 @@
                    let color = new THREE.Color(0xaa5511);
                    mat.color = color;
                    mat.wireframe = true;
-                   node.material = mat;
-                   /*
-                   if (node.material.name.includes("Trunk")){
-                     // console.log(node.material);
-                        let mat = node.material;
-                        let alphaMap = new THREE.TextureLoader().load("https://cdn.glitch.com/67168196-e75b-4d1b-9851-879eb27f9d01%2FGradMask.png");
-                        mat.map = mat.map.clone();
-                        mat.transparent = true;
-                        mat.color = new THREE.Color(0xffffff);
-                        mat.alphaMap = alphaMap;   
-                        mat.alphaMap.needsUpdate = true;
-                        mat.map.needsUpdate = true;
-                        comp.treeModels.push(node);
-                       // console.log(node.name, mat.name);
-                   }
-                   */
+                   node.material = mat;                  
                  }
               });
-              /*console.log(comp.treeModels);
-              comp.treeModels.forEach(function(model){
-                console.log(model.name, model.material.name, model.material.map.name, model.material.map.uuid, model.material.alphaMap.name, model.material.alphaMap.uuid);
-              });*/            
               comp.modelLoaded = true;
             });   
           }
