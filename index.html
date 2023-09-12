@@ -35,15 +35,33 @@
       </a-assets>
 
       <!-- Camera -->
-      <a entity></a>
+      <a-entity position="0 0 5"> 
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
+      </a-entity> 
 
       <!-- geometries -->
       <a-cylinder color="gray"
-                  height="5"
-                  position></a-cylinder>
+                  height="4"
+                  radius="0.2"
+                  position="0 2 0">
+      
+            <a-box
+                  color="yellow"
+                  height="0.6"
+                  width="0.3"
+                  depth="0.2"
+                  position="0 -0.5 0.2">
+              
+              <a-sphere
+                  color="red"
+                  radius="0.1"
+                  position="0 0.1 0.1">
+              </a-sphere>
+            </a-box>
+      </a-cylinder>
+
 
       <!-- Background color -->
       <a-sky color="#6cbcff"></a-sky>
@@ -55,7 +73,7 @@
         shader="flat"
         rotation="-90 0 0"
         scale="10 10 1"
-        position="0 0 -5"
+        position="0 0 0"
       ></a-plane>
     </a-scene>
   </body>

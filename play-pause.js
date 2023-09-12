@@ -1,14 +1,11 @@
 AFRAME.registerComponent('play-pause', {
 	init: function () {
-		var myVideo = document.querySelector('#waves');
-		var videoControls = document.querySelector('#videocontrols');
+		var mySound = document.querySelector('#yellow');
 		this.el.addEventListener('click', function () {
-			if(myVideo.paused){
-				myVideo.play();
-				videocontrols.setAttribute('src', '#pause');
+			if(mySound.paused){
+				mySound.play();
 			} else {
-				myVideo.pause();
-				videocontrols.setAttribute('src', '#play');
+				mySound.pause();
 			}
 		});
 	}
