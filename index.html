@@ -10,29 +10,13 @@
     />
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script>
-      AFRAME.registerComponent("play-pause", {
-        init: function () {
-          var myVideo = document.querySelector("#waves");
-          var videoControls = document.querySelector("#videocontrols");
-          this.el.addEventListener("click", function () {
-            if (myVideo.paused) {
-              myVideo.play();
-              videocontrols.setAttribute("src", "#pause");
-            } else {
-              myVideo.pause();
-              videocontrols.setAttribute("src", "#play");
-            }
-          });
-        },
-      });
-    </script>
+    <script src="play-pause.js"></script>
   </head>
 
   <body>
     <a-scene>
       <!-- assets manager -->
-      <a-asset>
+      <a-assets>
         <video
           id="waves"
           src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/lakemichigan_854x480.mp4"
@@ -48,9 +32,9 @@
         />
         <img
           id="floor"
-          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/1mx1m_tile.png"
+          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/checkergray.jpg?v=1694543548484"
         />
-      </a-asset>
+      </a-assets>
 
       <!-- Camera -->
       <a-camera>
@@ -58,7 +42,7 @@
       </a-camera>
 
       <!-- Video 16:9 -->
-      <a-video src="#waves" width="8" height="4.5" position="0 3 -8">
+      <a-video src="#waves" width="8" height="4.5" position="0 4 -8">
         <!-- play-pause button -->
         <a-image
           id="videocontrols"
@@ -75,7 +59,7 @@
       <!-- Ground -->
       <a-plane
         src="#floor"
-        repeat="10 10"
+        repeat="5 5"
         shader="flat"
         rotation="-90 0 0"
         scale="10 10 1"
