@@ -18,8 +18,8 @@
     <a-scene>
       <!-- assets manager -->
       <a-assets>
-        <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3"></audio>
-        <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3"></audio>
+        <audio id="cicadas" preload="auto" crossorigin="anonymous" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3"></audio>
+        <audio id="wait" preload="auto" crossorigin="anonymous" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3"></audio>
 
         <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
         <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
@@ -41,12 +41,15 @@
           play
         ></a-image>
       
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="yellow"
+             sound="on: click; src: #wait; autoplay: false;">
+      </a-box>
+      
       
       <a-cylinder color="gray"
                   height="1"
                   radius="1"
-                  position="2 0.5 0"
-                  sound="src: #cicadas"></a-cylinder>
+                  position="2 0.5 0"></a-cylinder>
 
       <!-- geometries -->
       <a-cylinder color="gray"
@@ -60,14 +63,13 @@
                   height="0.6"
                   width="0.3"
                   depth="0.2"
-                  position="0 -0.5 0.2"
-                  sound="src: #cicadas">
+                  position="0 -0.5 0.2">
               
               <a-sphere
                   color="red"
                   radius="0.1"
-                  position="0 0.1 0.1"
-                  >
+                  position="0 0.1 0.1">
+                <!-- sound="on: click; src: url(https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3); autoplay: false;" -->
               </a-sphere>
             </a-box>
       </a-cylinder>
@@ -75,7 +77,8 @@
 
       <!-- Background color -->
       <a-sky color="#6cbcff"
-             sound="src: #wait; autoplay: true; loop: true; positional; false"></a-sky>
+             ></a-sky>
+      <!-- sound="src: #wait; autoplay: true; loop: true; positional; false" -->
 
       <!-- Ground -->
       <a-plane
