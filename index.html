@@ -2,41 +2,76 @@
 <html lang="en">
   <head>
     <title>A-Frame Hello Video!</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="play-pause.js"></script>
-  </head>  
-  
+    <script>
+      AFRAME.registerComponent("play-pause", {
+        init: function () {
+          var myVideo = document.querySelector("#waves");
+          var videoControls = document.querySelector("#videocontrols");
+          this.el.addEventListener("click", function () {
+            if (myVideo.paused) {
+              myVideo.play();
+              videocontrols.setAttribute("src", "#pause");
+            } else {
+              myVideo.pause();
+              videocontrols.setAttribute("src", "#play");
+            }
+          });
+        },
+      });
+    </script>
+  </head>
+
   <body>
-    <a-scene >
-      
+    <a-scene>
       <!-- assets manager -->
       <a-asset>
-        <video id="waves" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/lakemichigan_854x480.mp4?v=1694540973901" loop="true"></video>
-        <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png?v=1694540961385">
-        <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png?v=1694540961385">
-        <img id="floor" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/1mx1m_tile.png?v=1694541564982">
+        <video
+          id="waves"
+          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/lakemichigan_854x480.mp4"
+          loop="true"
+        ></video>
+        <img
+          id="play"
+          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
+        />
+        <img
+          id="pause"
+          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
+        />
+        <img
+          id="floor"
+          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/1mx1m_tile.png"
+        />
       </a-asset>
-      
+
       <!-- Camera -->
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
-        
+
       <!-- Video 16:9 -->
-      <a-video src="#waves" width="8" height="4.5"
-               position="0 3 -9">
-        <a-image id="#videocontrols" ="#play"
-                 position="0 -3 0"
-                 scale="0.5 0.5 1" play-pause></a-image>
+      <a-video src="#waves" width="8" height="4.5" position="0 3 -8">
+        <!-- play-pause button -->
+        <a-image
+          id="videocontrols"
+          src="#play"
+          position="0 -3 0"
+          scale="0.5 0.5 1"
+          play-pause
+        ></a-image>
       </a-video>
-      
+
       <!-- Background color -->
       <a-sky color="#6cbcff"></a-sky>
-      
+
       <!-- Ground -->
       <a-plane
         src="#floor"
@@ -44,8 +79,8 @@
         shader="flat"
         rotation="-90 0 0"
         scale="10 10 1"
+        position="0 0 -5"
       ></a-plane>
     </a-scene>
   </body>
-  
 </html>
