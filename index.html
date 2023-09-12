@@ -17,11 +17,9 @@
     <a-scene>
       <!-- assets manager -->
       <a-assets>
-        <video
-          id="waves"
-          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/lakemichigan_854x480.mp4"
-          loop="true"
-        ></video>
+        <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3?v=1694544265138"></audio>
+        <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3?v=1694544288127"></audio>
+
         <img
           id="play"
           src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
@@ -37,21 +35,15 @@
       </a-assets>
 
       <!-- Camera -->
+      <a entity></a>
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
 
-      <!-- Video 16:9 -->
-      <a-video src="#waves" width="8" height="4.5" position="0 4 -8">
-        <!-- play-pause button -->
-        <a-image
-          id="videocontrols"
-          src="#play"
-          position="0 -3 0"
-          scale="0.5 0.5 1"
-          play-pause
-        ></a-image>
-      </a-video>
+      <!-- geometries -->
+      <a-cylinder color="gray"
+                  height="5"
+                  position></a-cylinder>
 
       <!-- Background color -->
       <a-sky color="#6cbcff"></a-sky>
