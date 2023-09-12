@@ -10,7 +10,7 @@
     />
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <!-- <script src="play-pause.js"></script> -->
+    <!-- <script src="play.js"></script> -->
     <script src="play.js"></script>
   </head>
 
@@ -18,8 +18,8 @@
     <a-scene>
       <!-- assets manager -->
       <a-assets>
-        <audio id="cicadas" preload="auto" crossorigin="anonymous" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3"></audio>
-        <audio id="wait" preload="auto" crossorigin="anonymous" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3"></audio>
+        <audio id="cicadas" preload="auto" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3?v=1694544265138"></audio>
+        <audio id="wait" preload="auto" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3?v=1694544288127"></audio>
 
         <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
         <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
@@ -42,7 +42,7 @@
         ></a-image>
       
       <a-box position="-1 0.5 2" rotation="0 45 0" color="yellow"
-             sound="on: click; src: #wait; autoplay: false;">
+             >
       </a-box>
       
       
@@ -63,12 +63,14 @@
                   height="0.6"
                   width="0.3"
                   depth="0.2"
-                  position="0 -0.5 0.2">
+                  position="0 -0.5 0.2"
+                  sound="src: #cicadas">
               
               <a-sphere
                   color="red"
                   radius="0.1"
-                  position="0 0.1 0.1">
+                  position="0 0.1 0.1"
+                  sound="on: click; src: #wait; autoplay: false;">
                 <!-- sound="on: click; src: url(https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3); autoplay: false;" -->
               </a-sphere>
             </a-box>
