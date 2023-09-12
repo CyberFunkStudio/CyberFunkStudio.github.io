@@ -18,9 +18,15 @@ AFRAME.registerComponent('play-pause', {
 
 AFRAME.registerComponent('play', {
 	init: function () {
-		var mySound = document.querySelector('#yellow');
+		var myEl = document.querySelector('#yellow');
     var soundControls = document.querySelector('#soundControls');
 		this.el.addEventListener('click', function () {
+      const audioCtx = new AudioContext();
+      myEl.components.sound.playSound();
+      soundControls.setAttribute('src', '#pause');
+      
+      console.log('Ho!')
+      /*
 			if(mySound.paused){
 				mySound.play();
         soundControls.setAttribute('src', '#pause');
@@ -28,6 +34,7 @@ AFRAME.registerComponent('play', {
 				mySound.pause();
         soundControls.setAttribute('src', '#play');
 			}
+      */
 		});
 	}
 });

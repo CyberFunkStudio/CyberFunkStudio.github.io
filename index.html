@@ -11,14 +11,15 @@
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <!-- <script src="play-pause.js"></script> -->
+    <script src="play.js"></script>
   </head>
 
   <body>
     <a-scene>
       <!-- assets manager -->
       <a-assets>
-        <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3" preload="auto"></audio>
-        <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3" preload="auto"></audio>
+        <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3"></audio>
+        <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3"></audio>
 
         <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
         <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
@@ -37,7 +38,7 @@
           src="#play"
           position="-1 1.5 0"
           scale="1 1 1"
-          play-pause
+          play
         ></a-image>
       
       
@@ -55,6 +56,7 @@
       
             <a-box
                   color="yellow"
+                  id="yellow"
                   height="0.6"
                   width="0.3"
                   depth="0.2"
