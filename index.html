@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>uv Reveal Transparency Map Sequence</title>
+    <title>Hello Video!</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
-    <script src="tree-manager.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="play-pause.js"></script>
   </head>  
   
   <body>
@@ -16,16 +15,20 @@
       
       <!-- assets manager -->
       <a-asset>
-        <a-asset-item id="tree-gltf" src="https://cdn.glitch.com/67168196-e75b-4d1b-9851-879eb27f9d01%2FTreeTrans3.glb" ></a-asset-item>
-        <img id="gradMask" src="GradMask.jpg">
+        <video id="waves" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/lakemichigan_854x480.mp4?v=1694540973901" loop="true"></video>
+        <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png?v=1694540961385">
+        <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png?v=1694540961385">
       </a-asset>
+      
+      <!-- Camera -->
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
         
-        <a-entity id="tree" gltf-model="#tree-gltf" scale="5 5 5"  tree-manager></a-entity>
-
-        <a-entity id="camera" camera orbit-controls="initialPosition: 1 1 -1; target: 0 1 0; minDistance: 0"></a-entity> 
-        <a-sky color="#88ddff"></a-sky>
-        <a-entity light="type:ambient; intensity:2"></a-entity>
-        <a-entity light="type:directional; intensity: 1.5" position="3 3 0" ></a-entity>
+      <!-- Video 16:9 -->
+      <a-video src="#waves" width="8" height="4.5"
+               position="0 3 -9">
+      </a-video>
     </a-scene>
   </body>
   
