@@ -1,12 +1,9 @@
-AFRAME.registerComponent('play', {
+AFRAME.registerComponent('pause', {
 	init: function () {
 		var myEl = document.querySelector('#yellow');
-    var soundControls = document.querySelector('#soundControls');
 		this.el.addEventListener('click', function () {
-      //const audioCtx = new AudioContext();
-      myEl.components.sound.playSound();
-      //soundControls.setAttribute('src', '#pause');
-      console.log('Playing Sound')
+      myEl.components.sound.pauseSound();
+      console.log('Sound is Paused')
 		});
 	}
 });
