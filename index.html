@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>A-Frame Hello Video!</title>
+    <title>A-Frame Hello Sound!</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -20,20 +20,27 @@
         <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3" preload="auto"></audio>
         <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3" preload="auto"></audio>
 
-        <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
-        />
-        <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
-        />
-        <img id="floor" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/checkergray.jpg?v=1694543548484"
-        />
+        <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
+        <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
+        <img id="floor" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/checkergray.jpg"/>
       </a-assets>
 
-      <!-- Camera -->
+      <!-- Camera with rig -->
       <a-entity position="0 0 5"> 
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
       </a-entity> 
+      
+      <a-image
+          id="soundcontrols"
+          src="#play"
+          position="-2 1 0"
+          scale="1 1 1"
+          play-pause
+        ></a-image>
+      
+      
       <a-cylinder color="gray"
                   height="1"
                   radius="1"
@@ -51,7 +58,8 @@
                   height="0.6"
                   width="0.3"
                   depth="0.2"
-                  position="0 -0.5 0.2">
+                  position="0 -0.5 0.2"
+                  sound="src: #cicadas">
               
               <a-sphere
                   color="red"
@@ -64,7 +72,8 @@
 
 
       <!-- Background color -->
-      <a-sky color="#6cbcff"></a-sky>
+      <a-sky color="#6cbcff"
+             sound="src: #wait; autoplay: true; loop: true; positional; false"></a-sky>
 
       <!-- Ground -->
       <a-plane
