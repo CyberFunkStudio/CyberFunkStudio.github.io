@@ -10,27 +10,21 @@
     />
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="play-pause.js"></script>
+    <!-- <script src="play-pause.js"></script> -->
   </head>
 
   <body>
     <a-scene>
       <!-- assets manager -->
       <a-assets>
-        <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3?v=1694544265138"></audio>
-        <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3?v=1694544288127"></audio>
+        <audio id="cicadas" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3" preload="auto"></audio>
+        <audio id="wait" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3" preload="auto"></audio>
 
-        <img
-          id="play"
-          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
+        <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
         />
-        <img
-          id="pause"
-          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
+        <img id="pause" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"
         />
-        <img
-          id="floor"
-          src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/checkergray.jpg?v=1694543548484"
+        <img id="floor" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/checkergray.jpg?v=1694543548484"
         />
       </a-assets>
 
@@ -40,6 +34,11 @@
         <a-cursor></a-cursor>
       </a-camera>
       </a-entity> 
+      <a-cylinder color="gray"
+                  height="1"
+                  radius="1"
+                  position="2 0.5 0"
+                  sound="src: #cicadas"></a-cylinder>
 
       <!-- geometries -->
       <a-cylinder color="gray"
@@ -58,9 +57,7 @@
                   color="red"
                   radius="0.1"
                   position="0 0.1 0.1"
-                  sound="src: #wait;
-                         on: click;
-                         volume: 1">
+                  >
               </a-sphere>
             </a-box>
       </a-cylinder>
