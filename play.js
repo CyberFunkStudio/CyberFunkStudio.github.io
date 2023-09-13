@@ -8,6 +8,11 @@ AFRAME.registerComponent('play', {
 	}
 });
 
+/* 
+do audio in three.js: 
+https://threejs.org/docs/#api/en/audio/Audio
+see also: https://github.com/mrdoob/three.js/blob/master/examples/webaudio_sandbox.html
+*/
 
 //another idea for a toggle behavior:
 /*
@@ -64,4 +69,10 @@ AFRAME.registerComponent('audiohandler', {
   <a-sound autoplay="false"></a-sound>
 </a-scene>
 
+*/
+
+/*
+since Firefox 63, Firefox's autoplay policy disallows audio from 
+being unless the play() call happens in a user-initiated event. 
+that must be a click, touch*, or key* event (mouse* events do not).
 */
