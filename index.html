@@ -21,32 +21,46 @@
       </a-assets>
 
       <!-- Camera with rig -->
-      <a-entity position="0 0 8"> 
-      <a-camera>
+      <a-entity position="0 0 8">
+      <a-camera position="0 0.81663 -0.65862">
         <a-cursor></a-cursor>
       </a-camera>
       </a-entity> 
       
 
       <!-- Background color -->
-      <a-sky color="#6cbcff"
+      <a-sky color="#23002b"
              ></a-sky>
       <!-- sound="src: #wait; autoplay: true; loop: true; positional; false" -->
 
       <!-- Ground -->
       <a-plane
         src="#floor"
-        repeat="5 5"
+        repeat="20 20"
         shader="flat"
         rotation="-90 0 0"
-        scale="10 10 1"
+        scale="40 40 1"
         position="0 0 0"
       ></a-plane>
       <a-entity id="hello-anna" 
                 scale="10 10 10"
                 position="0 1.8 5"
                 text="value: Hello Anna; align: center; color: #e604ff"></a-entity>
-      <a-box id="box1"></a-box>
+      <a-box id="box1" 
+             position="-1.60402 0.51985 4.01925" 
+             color="#d20b74" 
+             rotation="0 35 0"></a-box>
+      <a-box id="box2" 
+             position="1.27582 0.52 3.05794" 
+             color="#d20b74" 
+             rotation="0 65 0" 
+             material="color: #920750"></a-box>
+      <a-box id="box3" 
+             position="-1.65358 1.44464 4.11969" 
+             color="#d20b74" 
+             rotation="45 65 45" 
+             material="color: #600434" 
+             scale="0.5 0.5 0.5"></a-box>
     </a-scene>
   </body>
 </html>
