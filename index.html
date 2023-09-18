@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>A-Frame Hello Sound!</title>
+    <title>Template</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
@@ -10,77 +10,23 @@
     />
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <!-- <script src="play.js"></script> -->
-    <script src="play.js"></script>
-    <script src="stop.js"></script>
+
   </head>
 
   <body>
     <a-scene>
       <!-- assets manager -->
       <a-assets>
-        <audio id="cicadas" preload="auto" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/cicadas.mp3?v=1694544265138"></audio>
-        <audio id="wait" preload="auto" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3?v=1694544288127"></audio>
-
-        <img id="play" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/play.png"/>
-        <img id="stop" src="https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/stop.png?v=1694558224900"/>
         <img id="floor" src="https://cdn.glitch.global/87a20328-b348-408e-bc78-26aa4a824e30/checkergray.jpg"/>
       </a-assets>
 
       <!-- Camera with rig -->
-      <a-entity position="0 0 5"> 
+      <a-entity position="0 0 8"> 
       <a-camera>
         <a-cursor></a-cursor>
       </a-camera>
       </a-entity> 
       
-      <a-image
-          id="playControl"
-          src="#play"
-          position="-1 1.5 0"
-          scale="1 1 1"
-          play
-        ></a-image>
-      
-      <a-image
-          id="stopControl"
-          src="#stop"
-          position="-2.3 1.5 0"
-          scale="1 1 1"
-          stop
-        ></a-image>
-      
-      <a-box position="2 0.5 1" rotation="0 45 0" color="yellow"
-             >
-      </a-box>
-      
-      
-
-      <!-- geometries -->
-      <a-cylinder color="gray"
-                  height="4"
-                  radius="0.2"
-                  position="0 2 0">
-      
-            <a-box
-                  color="yellow"
-                  id="yellow"
-                  height="0.6"
-                  width="0.3"
-                  depth="0.2"
-                  position="0 -0.5 0.2"
-                  sound="src: #cicadas; loop: true">
-              
-              <a-sphere
-                  color="red"
-                  radius="0.1"
-                  position="0 0.1 0.1"
-                  sound="on: click; src: #wait; autoplay: false">
-                <!-- sound="on: click; src: url(https://cdn.glitch.global/e1abc6a9-a5b5-4559-b78f-7d758b1d33a6/wait.mp3); autoplay: false;" -->
-              </a-sphere>
-            </a-box>
-      </a-cylinder>
-
 
       <!-- Background color -->
       <a-sky color="#6cbcff"

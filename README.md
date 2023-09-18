@@ -1,8 +1,3 @@
-Basic sound playback in A-Frame
+Basic sound template for A-Frame
 
-click on the red dot to trigger a one time playback of a sound
-
-Click on the play button trigger a continuous (looping sound),
-emitted by the small yellow box on the pole
-
-Click on the pause button to pause the continuous sound
+Comes with a checkered floor and a clear blue sky background.
