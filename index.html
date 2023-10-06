@@ -19,23 +19,23 @@
         init: function () {
           AFRAME.log("Hello, World!");
           var el = this.el;
-          this.ready = false;
-          el.addEventListener(
-            "textfontset",
-            function () {
-              this.ready = true;
-            }.bind(this)
-          );
+          //this.ready = false;
+          //el.addEventListener(
+          //  "textfontset",
+          //  function () {
+          //    this.ready = true;
+          //  }.bind(this)
+          //);
           el.setAttribute("value", "Hello World");
         },
 
         tick: function () {
-          var el = this.el;
+          //var el = this.el;
           //if (!this.ready) {
           //  return;
           //}
           //AFRAME.log("Hello Bar");
-          el.setAttribute("value", "Hello World");
+          //el.setAttribute("value", "Hello World");
         },
       });
     </script>
@@ -69,7 +69,11 @@
         scale="40 40 1"
         position="0 0 0"
       ></a-plane>
-      <a-entity text="value: Hooiii" debug-output></a-entity>
+      <a-entity id="hello-text"
+                scale="10 10 10"
+                position="0 1.8 5"
+                text="value: Hoiii Anna; align: center; color: #e604ff"
+                debug-output></a-entity>
       <a-box
         id="box1"
         position="-1.60402 0.51985 4.01925"
