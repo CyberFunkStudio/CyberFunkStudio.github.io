@@ -10,6 +10,26 @@
     />
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script>
+      AFRAME.registerComponent('debug-text', {
+        
+        init: function() {
+          var el = this.el;
+          this.ready = false;
+            el.addEventListener('textfontset', function() {
+            this.ready = true;
+          }.bind(this));
+        },
+        
+        tick: function() {
+          var el = this.el;
+          if (!this.ready) {
+            return;
+          }
+          el.setAttribute('value', '20:30');
+        }
+      });
+    </script>
 
   </head>
 
@@ -42,7 +62,7 @@
         scale="40 40 1"
         position="0 0 0"
       ></a-plane>
-      <a-entity id="hello-anna" 
+      <a-entity id="debug-info" 
                 scale="10 10 10"
                 position="0 1.8 5"
                 text="value: Hoiii Anna; align: center; color: #e604ff"></a-entity>
