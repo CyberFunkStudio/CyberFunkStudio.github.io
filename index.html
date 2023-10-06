@@ -10,10 +10,12 @@
     />
 
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script> 
+
     <script>
-      AFRAME.registerComponent('debug-text', {
-        
+      AFRAME.registerComponent('debug-output', {
         init: function() {
+          AFRAME.log('Hello Foo');
           var el = this.el;
           this.ready = false;
             el.addEventListener('textfontset', function() {
@@ -22,6 +24,7 @@
         },
         
         tick: function() {
+          AFRAME.log('Hello Bar');
           var el = this.el;
           if (!this.ready) {
             return;
@@ -47,6 +50,9 @@
       </a-camera>
       </a-entity> 
       
+      <!-- Log -->
+      <a-log position="-3 0 4"></a-log>
+      
 
       <!-- Background color -->
       <a-sky color="#23002b"
@@ -65,7 +71,8 @@
       <a-entity id="debug-info" 
                 scale="10 10 10"
                 position="0 1.8 5"
-                text="value: Hoiii Anna; align: center; color: #e604ff"></a-entity>
+                text="value: Hoiii Anna; align: center; color: #e604ff" 
+                debug-output></a-entity>
       <a-box id="box1" 
              position="-1.60402 0.51985 4.01925" 
              color="#d20b74" 
