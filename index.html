@@ -18,7 +18,7 @@
     <script>
       AFRAME.registerComponent('debug-output', {
         init: function() {
-          console.log('Hello, World!');
+          AFRAME.log('Hello, World!');
           var el = this.el;
           this.ready = false;
             el.addEventListener('textfontset', function() {
@@ -27,11 +27,11 @@
         },
         
         tick: function() {
-          AFRAME.log('Hello Bar');
           var el = this.el;
           if (!this.ready) {
             return;
           }
+          AFRAME.log('Hello Bar');
           el.setAttribute('value', '20:30');
         }
       });
@@ -48,11 +48,7 @@
       <a-camera position="0 0.81663 -0.65862">
         <a-cursor></a-cursor>
       </a-camera>
-      </a-entity> 
-      
-      <!-- Log -->
-      <a-log position="-3 0 4"></a-log>
-      
+      </a-entity>       
 
       <!-- Background color -->
       <a-sky color="#23002b"></a-sky>
@@ -67,11 +63,7 @@
         scale="40 40 1"
         position="0 0 0"
       ></a-plane>
-      <a-entity id="debug-info" 
-                scale="10 10 10"
-                position="0 1.8 5"
-                text="value: Hoiii Anna; align: center; color: #e604ff" 
-                debug-output></a-entity>
+      <a-entity debug-output></a-entity>
       <a-box id="box1" 
              position="-1.60402 0.51985 4.01925" 
              color="#d20b74" 
