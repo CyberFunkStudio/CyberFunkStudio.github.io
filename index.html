@@ -12,10 +12,13 @@
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script> 
 
+  </head>
+
+  <body>
     <script>
       AFRAME.registerComponent('debug-output', {
         init: function() {
-          AFRAME.log('Hello Foo');
+          console.log('Hello, World!');
           var el = this.el;
           this.ready = false;
             el.addEventListener('textfontset', function() {
@@ -33,10 +36,7 @@
         }
       });
     </script>
-
-  </head>
-
-  <body>
+    
     <a-scene>
       <!-- assets manager -->
       <a-assets>
@@ -55,8 +55,7 @@
       
 
       <!-- Background color -->
-      <a-sky color="#23002b"
-             ></a-sky>
+      <a-sky color="#23002b"></a-sky>
       <!-- sound="src: #wait; autoplay: true; loop: true; positional; false" -->
 
       <!-- Ground -->
