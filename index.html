@@ -9,28 +9,52 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
 
+    <!-- External sources -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script>
+
+    <!-- Internal sources -->
+    <script src="game-state.js"></script>
+    <script src="main-camera.js"></script>
+    <script src="GameStates.js"></script>
+
+    <script>
+      function setState(state) {
+        var gameState = document.getElementById('scene').components['game-state'].setState(state);
+      };
+    </script>
+
+    <style>
+      #button-container {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        z-index: 1;
+      }
+    </style>
   </head>
 
   <body>
-    <a-scene stats>
-      <a-entity position="0 0 8">
-        <a-camera>
-          <a-cursor></a-cursor>
-        </a-camera>
+    <div id="button-container">
+      <button onclick="setState('Home')">Home</button>
+      <button onclick="setState('Team')">Team</button>
+      <button onclick="setState('Contact')">Contact</button>
+      <button onclick="setState('Product')">Product</button>
+    </div>
+
+    <a-scene id="scene" stats game-state>
+      <a-entity id="mainCameraWrapper" main-camera>
+        <a-camera id="mainCamera" fov="50"></a-camera>
       </a-entity>
+
+      <a-assets>
+        <a-asset-item id="karton-model" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item> 
+      </a-assets>
+      <a-entity scale="10 10 10" position="0 0 0" rotation="0 -70 0" gltf-model="#karton-model"></a-entity>
 
       <!-- Background color -->
       <a-scene background="color: #b4cdc2"></a-scene>
-    
-      <a-box
-        id="box1"
-        position="-1.60402 0.51985 4.01925"
-        color="#f37321"
-        rotation="0 35 0">
-      </a-box>
     </a-scene>
   </body>
 </html>
