@@ -1,7 +1,7 @@
 AFRAME.registerComponent('main-camera', {
     init: function()
     {
-      this.el.setAttribute('wasd-controls', 'enabled', false);
+        document.getElementById('mainCamera').setAttribute('wasd-controls', 'enabled', false);
     },
 
     setCameraPosition: function(x, y, z, rx, ry, rz) {
