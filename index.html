@@ -43,7 +43,7 @@
       <button onclick="setState('Product')">Product</button>
     </div>
 
-    <a-scene id="scene" stats game-state>
+    <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state>
       <a-entity id="mainCameraWrapper" main-camera>
         <a-camera id="mainCamera" fov="50"></a-camera>
       </a-entity>
@@ -52,6 +52,16 @@
         <a-asset-item id="karton-model" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item> 
       </a-assets>
       <a-entity scale="10 10 10" position="0 0 0" rotation="0 -70 0" gltf-model="#karton-model"></a-entity>
+
+      <a-entity 
+        id='Products'
+        text="value: Products; color: #000" 
+        geometry="primitive: plane" 
+        material="color: #FFF"
+        position="1.5 1.5 2.3"
+        scale="1 0.5 1"
+        3d-interaction>
+      </a-entity>
 
       <!-- Background color -->
       <a-scene background="color: #b4cdc2"></a-scene>
