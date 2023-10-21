@@ -15,13 +15,13 @@
     <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script>
 
     <!-- Internal sources -->
-    <script src="game-state.js"></script>
-    <script src="main-camera.js"></script>
-    <script src="GameStates.js"></script>
+    <script src="Scripts/game-state.js"></script>
+    <script src="Scripts/GameStates.js"></script>
+    <script src="Scripts/main-camera.js"></script>
 
     <script>
       function setState(state) {
-        var gameState = document.getElementById('scene').components['game-state'].setState(state);
+        document.getElementById('scene').components['game-state'].setState(state);
       };
     </script>
 

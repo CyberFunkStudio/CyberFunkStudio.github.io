@@ -3,7 +3,7 @@
  */
 AFRAME.registerComponent('game-state', {
     init: function() {
-        this.direction = GameStates.Home;
+        this.setState(GameStates.Home.name);
     },
 
     setState: function(state) {
