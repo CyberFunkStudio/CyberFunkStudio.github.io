@@ -16,7 +16,7 @@ AFRAME.registerComponent('3d-interaction', {
             if (el.id ==='Home'){
                 var aboutTextfield = document.getElementById('About-Textfield');
                 var isVisible = aboutTextfield.getAttribute('visible');
-                aboutTextfield.setAttribute('visible', !isVisible);
+                aboutTextfield.object3D.visible = !aboutTextfield.object3D.visible;
             }
         });
     }
