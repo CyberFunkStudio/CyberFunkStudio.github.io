@@ -18,6 +18,12 @@ AFRAME.registerComponent('3d-interaction', {
                 var isVisible = aboutTextfield.getAttribute('visible');
                 aboutTextfield.object3D.visible = !aboutTextfield.object3D.visible;
             }
+
+            else if (el.id ==='Contact-Textfield'){
+                var contactTextfield = document.getElementById('Contact-Textfield');
+                var isVisible = contactTextfield.getAttribute('visible');
+                contactTextfield.object3D.visible = !contactTextfield.object3D.visible;
+            }
         });
     }
 });
