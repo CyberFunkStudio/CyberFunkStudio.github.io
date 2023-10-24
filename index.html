@@ -28,20 +28,40 @@
     <style>
       #button-container {
         position: fixed;
-        bottom: 10px;
+        bottom: 40px;
         left: 10px;
         z-index: 1;
+        display: flex;
+        flex-direction: column;
+        visibility: hidden;
+      }
+
+      #menu-button {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        z-index: 2;
       }
     </style>
   </head>
 
   <body>
+    <button id="menu-button" onclick="toggleMenu()">Menu</button>
+    
     <div id="button-container">
       <button onclick="setState('Home')">Home</button>
       <button onclick="setState('Team')">Team</button>
       <button onclick="setState('Contact')">Contact</button>
       <button onclick="setState('Products')">Product</button>
     </div>
+
+    <script>
+      function toggleMenu(){
+        var container = document.getElementById('button-container');
+        var visibility = container.style.visibility;
+        container.style.visibility = (visibility === 'visible') ? 'hidden' : 'visible';
+      }
+    </script>
 
     <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state>
       <a-entity id="mainCameraWrapper" main-camera>
