@@ -11,7 +11,13 @@ AFRAME.registerComponent('3d-interaction', {
         });
 
         el.addEventListener('click', function() {
+            console.log('Button clicked:', el.id);
             document.getElementById('scene').components['game-state'].setState(el.id);
+            if (el.id ==='Home'){
+                var aboutTextfield = document.getElementById('About-Textfield');
+                var isVisible = aboutTextfield.getAttribute('visible');
+                aboutTextfield.setAttribute('visible', !isVisible);
+            }
         });
     }
 });

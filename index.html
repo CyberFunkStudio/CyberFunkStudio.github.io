@@ -53,6 +53,30 @@
       </a-assets>
       <a-entity scale="10 10 10" position="0 0 0" rotation="0 -70 0" gltf-model="#karton-model"></a-entity>
 
+
+      <!-- About 3D button-->
+      <a-entity 
+        id='Home'
+        text="value: About; color: #000; align: center; width: 3" 
+        geometry="primitive: plane; height: 0.5" 
+        material="color: #FFF"
+        position="1.45 2.5 2.3"
+        scale="1 1 1"
+        3d-interaction>
+      </a-entity>
+
+      <!-- About-TextField. Should appear when about button is pressed -->
+      <a-entity 
+        id='About-Textfield'
+        text="value: About-Text\n A brief summary of\n what we do and why; 
+        color: #000; align: center; width: 2" 
+        geometry="primitive: plane; height: 2; width: 1.1" 
+        material="color: #FFF"
+        position="0.2 2.4 2.3"
+        scale="1 1 1"
+        visible="false">
+      </a-entity>
+
       <!-- Contact 3D button-->
       <a-entity 
         id='Contact'
@@ -74,17 +98,6 @@
         scale="1 1 1"
         3d-interaction>
       </a-entity>
-
-      <!-- About 3D button-->
-      <a-entity 
-        id='Home'
-        text="value: About; color: #000; align: center; width: 3" 
-        geometry="primitive: plane; height: 0.5" 
-        material="color: #FFF"
-        position="1.45 2.5 2.3"
-        scale="1 1 1"
-        3d-interaction>
-      </a-entity>
       
       <!-- Products 3D button-->
       <a-entity 
@@ -95,19 +108,6 @@
         position="1.45 1.8 2.3"
         scale="1 1 1"
         3d-interaction>
-      </a-entity>
-
-      <!-- About-TextField. Should appear when about button is pressed -->
-      <a-entity 
-        id='About-Text'
-        text="value: About-Text\n A brief summary of\n what we do and why; 
-        color: #000; align: center; width: 2" 
-        geometry="primitive: plane; height: 2; width: 1.1" 
-        material="color: #FFF"
-        position="0.2 2.4 2.3"
-        scale="1 1 1"
-        visible="false"
-        >
       </a-entity>
 
       <!-- Background color -->
