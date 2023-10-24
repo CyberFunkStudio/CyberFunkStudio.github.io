@@ -18,8 +18,14 @@ AFRAME.registerComponent('3d-interaction', {
                 var aboutTextfield = document.getElementById('About-Textfield');
                 var isVisible = aboutTextfield.getAttribute('visible');
                 aboutTextfield.object3D.visible = !aboutTextfield.object3D.visible;
+            } 
+            else if (el.id === 'Contact'){
+                var contactTextfield = document.querySelectorAll('.Contact-Textfield');
+                contactTextfield.forEach(function(textfield) {
+                    var isVisible = contactTextfield.getAttribute('visible');
+                    textfield.setAttribute('visible', !isVisible);
+                });
             }
-
         });
     }
 });
