@@ -13,6 +13,10 @@ AFRAME.registerComponent('game-state', {
         var rot = this.state.rotation;
 
         this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
+/*
+        var contactTextfield = document.getElementById('Contact');
+        var isVisible = (state === 'Contact');
+        contactTextfield.setAttribute('visible', isVisible); */
     },
 
     setCameraPosition: function(x, y, z, rx, ry, rz) {
