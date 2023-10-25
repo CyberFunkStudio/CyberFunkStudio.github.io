@@ -23,10 +23,22 @@ AFRAME.registerComponent('game-state', {
     },
 
     setTextFieldVisibility: function(state) {
+       var allTextfields = document.querySelectorAll('.Textfield');
+       var currentGameStateTextfields = GameStates.Matching(state).textfieldIds;
+
+       allTextfields.forEach(function(textfield) {
+            if(currentGameStateTextfields.includes(textfield.id)){
+                textfield.setAttribute('visible', true);
+            } else {
+                textfield.setAttribute('visible', false);
+            }
+       });
+       
+        /*
         var textfieldIds = GameStates.Matching(state).textfieldIds;
         for (var i = 0; i < textfieldIds.length; i++) {
             var textfield = document.getElementById(textfieldIds[i]);
             textfield.setAttribute('visible', true);
-        }
+        } */
     }
 });
