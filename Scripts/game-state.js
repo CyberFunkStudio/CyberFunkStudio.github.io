@@ -33,12 +33,5 @@ AFRAME.registerComponent('game-state', {
                 textfield.setAttribute('visible', false);
             }
        });
-       
-        /*
-        var textfieldIds = GameStates.Matching(state).textfieldIds;
-        for (var i = 0; i < textfieldIds.length; i++) {
-            var textfield = document.getElementById(textfieldIds[i]);
-            textfield.setAttribute('visible', true);
-        } */
     }
 });
