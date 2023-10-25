@@ -3,15 +3,29 @@ AFRAME.registerComponent('3d-interaction', {
         var el = this.el;
 
         el.addEventListener('mouseenter', function() {
-            el.setAttribute('scale','1.1 0.6 1.1')
+            el.setAttribute('scale','1.1 1.1 1.1')
         })
 
         el.addEventListener('mouseleave', function() {
-            el.setAttribute('scale','1 0.5 1')
+            el.setAttribute('scale','1 1 1')
         });
 
         el.addEventListener('click', function() {
+            console.log('Button clicked:', el.id);
             document.getElementById('scene').components['game-state'].setState(el.id);
+            
+            if (el.id ==='Home'){
+                var aboutTextfield = document.getElementById('About-Textfield');
+                var isVisible = aboutTextfield.getAttribute('visible');
+                aboutTextfield.object3D.visible = !aboutTextfield.object3D.visible;
+            } 
+            else if (el.id === 'Contact'){
+                var contactTextfield = document.querySelectorAll('.Contact-Textfield');
+                contactTextfield.forEach(function(textfield) {
+                    var isVisible = contactTextfield.getAttribute('visible');
+                    textfield.setAttribute('visible', !isVisible);
+                });
+            }
         });
     }
 });
