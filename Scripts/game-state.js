@@ -20,8 +20,22 @@ AFRAME.registerComponent('game-state', {
     },
 
     setCameraPosition: function(x, y, z, rx, ry, rz) {
-        var mainCamera = document.getElementById('mainCameraWrapper').components['main-camera'];
-        mainCamera.setCameraPosition(x, y, z, rx, ry, rz);
+        var mainCameraWrapper = document.getElementById('mainCameraWrapper');
+        
+        mainCameraWrapper.setAttribute('animation__position', {
+            property: 'position',
+            to: {x: x, y: y, z: z},
+            dur: 2000,
+            easing: 'easeInOutQuad',
+        });
+
+        mainCameraWrapper.setAttribute('animation__rotation', {
+            property: 'rotation',
+            to: {x: rx, y: ry, z: rz},
+            dur: 2000,
+            easing: 'easeInOutQuad',
+        });
+        //mainCamera.setCameraPosition(x, y, z, rx, ry, rz);
     },
 
     setTextFieldVisibility: function(state) {
@@ -43,7 +57,7 @@ AFRAME.registerComponent('game-state', {
             property: 'rotation',
             to: {x: rx, y: ry, z: rz},
             dur: 2000,
-            easing: 'linear'
+            easing: 'easeInOutQuad'
         });
     }
 });
