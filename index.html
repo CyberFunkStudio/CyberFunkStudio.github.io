@@ -64,15 +64,18 @@
     </script>
 
     <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]">
-      <a-entity id="mainCameraWrapper" main-camera>
-        <a-camera id="mainCamera" fov="50"></a-camera>
-      </a-entity>
 
       <a-assets>
         <a-asset-item id="karton-model" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item> 
       </a-assets>
       <a-entity scale="10 10 10" position="0 0 0" rotation="0 -70 0" gltf-model="#karton-model"></a-entity>
 
+      <!--camera animation-->
+      <a-entity id="rig" position="0 0 0">
+        <a-entity id="mainCameraWrapper" main-camera>
+          <a-camera id="mainCamera" fov="50"></a-camera>
+        </a-entity>
+      </a-entity>
 
       <!-- About 3D button-->
       <a-entity data-raycastable
@@ -299,12 +302,6 @@
         scale="1 1 1"
         visible="true"
         3d-interaction>
-      </a-entity>
-
-      <!--animation-->
-      <a-entity id="rig-homeToTeam" position="-1 2 2.5" rotation="0 0 0" animation="property: rotation; to: 0 -180 0; loop: true; dur: 5000">
-        <!--<a-box position="1.25 -0.25 3.5" color="mediumseagreen" scale="0.4 0.4 0.4"></a-sphere>-->
-        <a-camera position="1.25 -0.25 3.5"></a-camera>
       </a-entity>
 
       <!-- Background color -->
