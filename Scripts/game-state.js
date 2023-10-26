@@ -11,9 +11,11 @@ AFRAME.registerComponent('game-state', {
 
         var pos = this.state.position;
         var rot = this.state.rotation;
+        var rigRot = this.state.rigRotation;
 
         this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         this.setTextFieldVisibility(state);
+        this.setRigRotation(rigRot.x, rigRot.y, rigRot.z);
 
     },
 
@@ -33,5 +35,15 @@ AFRAME.registerComponent('game-state', {
                 textfield.setAttribute('visible', false);
             }
        });
+    },
+
+    setRigRotation: function(rx, ry, rz) {
+        var rig = document.getElementById('rig');
+        rig.setAttribute('animation', {
+            property: 'rotation',
+            to: {x: rx, y: ry, z: rz},
+            dur: 2000,
+            easing: 'linear'
+        });
     }
 });
