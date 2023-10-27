@@ -16,26 +16,11 @@ AFRAME.registerComponent('game-state', {
         this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         this.setTextFieldVisibility(state);
         this.setRigRotation(rigRot.x, rigRot.y, rigRot.z);
-
     },
 
     setCameraPosition: function(x, y, z, rx, ry, rz) {
-        var mainCameraWrapper = document.getElementById('mainCameraWrapper');
-        
-        mainCameraWrapper.setAttribute('animation__position', {
-            property: 'position',
-            to: {x: x, y: y, z: z},
-            dur: 2000,
-            easing: 'easeInOutQuad',
-        });
-
-        mainCameraWrapper.setAttribute('animation__rotation', {
-            property: 'rotation',
-            to: {x: rx, y: ry, z: rz},
-            dur: 2000,
-            easing: 'easeInOutQuad',
-        });
-        //mainCamera.setCameraPosition(x, y, z, rx, ry, rz);
+        var mainCameraWrapper = document.getElementById('mainCameraWrapper').components['main-camera'];
+        mainCameraWrapper.setCameraPosition(x, y, z, rx, ry, rz);
     },
 
     setTextFieldVisibility: function(state) {
