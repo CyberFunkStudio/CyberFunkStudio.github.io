@@ -20,6 +20,8 @@
     <script src="Scripts/GameStates.js"></script>
     <script src="Scripts/main-camera.js"></script>
     <script src="Scripts/text-field.js"></script>
+    <script src="Scripts/mouse-reaction.js"></script>
+    <script src="Scripts/ui-text-popup.js"></script>
 
     <script>
       function setState(state) {
@@ -50,6 +52,32 @@
         right: 10px;
         z-index: 2;
       }
+      
+      #overlay {
+        display:none;    /* This make it initially hidden                                           */
+        position:fixed;  /* This makes it so it says in a fixed position even if they scroll around */
+        left:0px;        /* This positions the element to the left most position                    */
+        top:0px;         /* This positions the elment to the top most position                      */
+        width:100%;      /* This makes the element take up 100% of the parents width                */
+        height:100%;     /* This makes the element take up 100% of the parents height               */
+        background:#000; /* Give it a black background                                              */
+        opacity:0.5;     /* Change the opacity to 50% so that is see through.                       */
+        z-index:99999;   /* Change the z-index so it will be above everything else                  */
+      }
+
+      #Product-1-Popup {
+        display:none;
+        position:fixed;
+        left:50%;              /* left and top here position top left page                                        */
+        top:50%;               /* of the element to the center of the                                             */
+        width:300px;           /* Set the popup to have a specific width/height                                   */
+        height:150px;
+        margin-top:-75px;      /* To get the popup to center correctly we need                                    */
+        margin-left:-150px;    /* To displace the the top/left margins by half of the width/height                */
+        background:#FFFFFF;    /* Background of white                                                             */
+        border:2px solid #000; /* And give it a border                                                            */
+        z-index:100000;        /* Set z-index to 1 more than that of the overlay so the popup is over the overlay */
+      }
     </style>
   </head>
 
@@ -73,7 +101,7 @@
       <!--camera animation-->
       <a-entity id="rig">
         <a-entity id="mainCameraWrapper" main-camera>
-          <a-camera id="mainCamera" fov="50"></a-camera>
+          <a-camera id="mainCamera"></a-camera>
         </a-entity>
       </a-entity>
 
@@ -86,6 +114,7 @@
         position="1.45 2.5 2.3"
         scale="1 1 1"
         3d-interaction
+        mouse-reaction
         data-raycastable>
       </a-entity>
 
@@ -110,6 +139,7 @@
         position="-1.3 2.5 2.3"
         scale="1 1 1"
         3d-interaction
+        mouse-reaction
         data-raycastable>
       </a-entity>
 
@@ -148,6 +178,7 @@
         position="-1.3 3.2 2.3"
         scale="1 1 1"
         3d-interaction
+        mouse-reaction
         data-raycastable>
       </a-entity>
 
@@ -201,6 +232,7 @@
         position="1.45 1.8 2.3"
         scale="1 1 1"
         3d-interaction
+        mouse-reaction
         data-raycastable>
       </a-entity>
 
@@ -215,9 +247,9 @@
         rotation="0 20 0"
         scale="1 1 1"
         visible="true"
-        3d-interaction
-        data-raycastable
-        text-field>
+        text-field
+        ui-text-popup="popupId: Product-1-Popup"
+        mouse-reaction>
       </a-entity>
 
       <a-entity 
@@ -231,7 +263,7 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
 
@@ -246,7 +278,7 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
 
@@ -261,7 +293,7 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
 
@@ -277,7 +309,7 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
 
@@ -292,7 +324,7 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
 
@@ -307,7 +339,7 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
 
@@ -322,9 +354,14 @@
         scale="1 1 1"
         visible="true"
         3d-interaction
-        data-raycastable
+        mouse-reaction
         text-field>
       </a-entity>
+
+      <div id="Product-1-Popup">
+        Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
+      </div>
+      <div id="overlay"></div>
 
       <!-- Background color -->
       <a-scene background="color: #b4cdc2"></a-scene>
