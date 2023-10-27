@@ -1,16 +1,13 @@
 AFRAME.registerComponent('main-camera', {
-    init: function()
-    {
+    init: function() {
         document.getElementById('mainCamera').setAttribute('wasd-controls', 'enabled', false);
     },
     
-    tick: function()
-    {
+    tick: function() {
         TWEEN.update();
     },
 
-    setCameraPosition: function(x, y, z, rx, ry, rz, duration) 
-    {
+    setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
         var wrapper = this.el;
 
         wrapper.setAttribute('animation__position', {
@@ -29,8 +26,7 @@ AFRAME.registerComponent('main-camera', {
         this.resetLookControls(duration);
     },
 
-    resetLookControls: function(duration) 
-    {
+    resetLookControls: function(duration) {
         var lookControls = this.el.children[0].components['look-controls'];
 
         new TWEEN.Tween(lookControls.pitchObject.rotation)
