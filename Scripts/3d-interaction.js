@@ -1,6 +1,7 @@
 AFRAME.registerComponent('3d-interaction', {
     init: function() {
         var el = this.el;
+        this.isClicked = false;
 
         el.addEventListener('mouseenter', function() {
             el.setAttribute('scale','1.1 1.1 1.1')
@@ -11,14 +12,9 @@ AFRAME.registerComponent('3d-interaction', {
         });
 
         el.addEventListener('click', function() {
-            console.log('Button clicked:', el.id);
-            document.getElementById('scene').components['game-state'].setState(el.id);
-            
-            if (el.id ==='Home'){
-                var aboutTextfield = document.getElementById('About-Textfield');
-                var isVisible = aboutTextfield.getAttribute('visible');
-                aboutTextfield.object3D.visible = !aboutTextfield.object3D.visible;
-            } 
+            document.getElementById('scene').components['game-state']
+                .setState(this.isClicked ? GameStates.Home : el.id);
+            this.isClicked = !this.isClicked;
         });
     }
 });
