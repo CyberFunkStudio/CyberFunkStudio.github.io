@@ -32,6 +32,11 @@ AFRAME.registerComponent('game-state', {
         document.querySelectorAll('[text-field]').forEach(function(textfield) {
             var isVisible = currentGameStateTextfields.includes(textfield.id);
             textfield.components['text-field'].setVisibility(isVisible);
+            if (isVisible && textfield.classList.contains('Raycastable')) {
+                textfield.setAttribute('data-raycastable', '');
+            } else {
+                textfield.removeAttribute('data-raycastable');
+            }
         });
     },
 
