@@ -1,5 +1,7 @@
 /**
  * Handles the connection of the various game states and how to move between them.
+ * This class focuses on providing a high-level overview of WHAT happens. HOW it happens should
+ * be delegated to separate classes where possible/sensible.
  */
 AFRAME.registerComponent('game-state', {
     init: function() {
