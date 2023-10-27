@@ -1,9 +1,12 @@
 /**
  * Handles the connection of the various game states and how to move between them.
+ * This class focuses on providing a high-level overview of WHAT happens. HOW it happens should
+ * be delegated to separate classes where possible/sensible.
  */
 AFRAME.registerComponent('game-state', {
     init: function() {
         this.setState(GameStates.Home.name);
+        this.animationDuration_ms = 2000;
     },
 
     setState: function(state) {
@@ -11,15 +14,16 @@ AFRAME.registerComponent('game-state', {
 
         var pos = this.state.position;
         var rot = this.state.rotation;
+        var rigRot = this.state.rigRotation;
 
-        this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
         this.setTextFieldVisibility(state);
-
+        this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, this.animationDuration_ms);
+        this.setRigRotation(rigRot.x, rigRot.y, rigRot.z, this.animationDuration_ms);
     },
 
-    setCameraPosition: function(x, y, z, rx, ry, rz) {
-        var mainCamera = document.getElementById('mainCameraWrapper').components['main-camera'];
-        mainCamera.setCameraPosition(x, y, z, rx, ry, rz);
+    setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
+        var mainCameraWrapper = document.getElementById('mainCameraWrapper').components['main-camera'];
+        mainCameraWrapper.setCameraPosition(x, y, z, rx, ry, rz, duration);
     },
 
     setTextFieldVisibility: function(state) {
@@ -33,12 +37,15 @@ AFRAME.registerComponent('game-state', {
                 textfield.setAttribute('visible', false);
             }
        });
-       
-        /*
-        var textfieldIds = GameStates.Matching(state).textfieldIds;
-        for (var i = 0; i < textfieldIds.length; i++) {
-            var textfield = document.getElementById(textfieldIds[i]);
-            textfield.setAttribute('visible', true);
-        } */
+    },
+
+    setRigRotation: function(rx, ry, rz, duration) {
+        var rig = document.getElementById('rig');
+        rig.setAttribute('animation', {
+            property: 'rotation',
+            to: {x: rx, y: ry, z: rz},
+            dur: duration,
+            easing: 'easeInOutQuad'
+        });
     }
 });

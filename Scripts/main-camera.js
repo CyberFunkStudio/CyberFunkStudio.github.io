@@ -4,13 +4,20 @@ AFRAME.registerComponent('main-camera', {
         document.getElementById('mainCamera').setAttribute('wasd-controls', 'enabled', false);
     },
 
-    setCameraPosition: function(x, y, z, rx, ry, rz) {
+    setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
         var wrapper = this.el;
-        var lookControls = document.getElementById('mainCamera').components['look-controls'];
+        wrapper.setAttribute('animation__position', {
+            property: 'position',
+            to: {x: x, y: y, z: z},
+            dur: duration,
+            easing: 'easeInOutQuad',
+        });
 
-        wrapper.setAttribute('position', {x: x, y: y, z: z});
-        wrapper.setAttribute('rotation', {x: rx, y: ry, z: rz}); 
-        lookControls.pitchObject.rotation.set(0, 0, 0);
-        lookControls.yawObject.rotation.set(0, 0, 0);
+        wrapper.setAttribute('animation__rotation', {
+            property: 'rotation',
+            to: {x: rx, y: ry, z: rz},
+            dur: duration,
+            easing: 'easeInOutQuad',
+        });
     } 
 });
