@@ -14,7 +14,7 @@ AFRAME.registerComponent('3d-interaction', {
             console.log('Button clicked:', el.id);
             document.getElementById('scene').components['game-state'].setState(el.id);
             
-            if (el.id ==='Home'){
+            if (el.id ==='About'){
                 var aboutTextfield = document.getElementById('About-Textfield');
                 var isVisible = aboutTextfield.getAttribute('visible');
                 aboutTextfield.object3D.visible = !aboutTextfield.object3D.visible;
