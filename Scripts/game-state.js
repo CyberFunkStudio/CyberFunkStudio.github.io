@@ -4,6 +4,7 @@
 AFRAME.registerComponent('game-state', {
     init: function() {
         this.setState(GameStates.Home.name);
+        this.animationDuration_ms = 2000;
     },
 
     setState: function(state) {
@@ -13,14 +14,14 @@ AFRAME.registerComponent('game-state', {
         var rot = this.state.rotation;
         var rigRot = this.state.rigRotation;
 
-        this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z);
+        this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, this.animationDuration_ms);
         this.setTextFieldVisibility(state);
-        this.setRigRotation(rigRot.x, rigRot.y, rigRot.z);
+        this.setRigRotation(rigRot.x, rigRot.y, rigRot.z, this.animationDuration_ms);
     },
 
-    setCameraPosition: function(x, y, z, rx, ry, rz) {
+    setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
         var mainCameraWrapper = document.getElementById('mainCameraWrapper').components['main-camera'];
-        mainCameraWrapper.setCameraPosition(x, y, z, rx, ry, rz);
+        mainCameraWrapper.setCameraPosition(x, y, z, rx, ry, rz, duration);
     },
 
     setTextFieldVisibility: function(state) {
@@ -36,12 +37,12 @@ AFRAME.registerComponent('game-state', {
        });
     },
 
-    setRigRotation: function(rx, ry, rz) {
+    setRigRotation: function(rx, ry, rz, duration) {
         var rig = document.getElementById('rig');
         rig.setAttribute('animation', {
             property: 'rotation',
             to: {x: rx, y: ry, z: rz},
-            dur: 2000,
+            dur: duration,
             easing: 'easeInOutQuad'
         });
     }
