@@ -14,8 +14,8 @@ AFRAME.registerComponent('game-state', {
         var rot = this.state.rotation;
         var rigRot = this.state.rigRotation;
 
-        this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, this.animationDuration_ms);
         this.setTextFieldVisibility(state);
+        this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, this.animationDuration_ms);
         this.setRigRotation(rigRot.x, rigRot.y, rigRot.z, this.animationDuration_ms);
     },
 
