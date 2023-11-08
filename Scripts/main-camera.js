@@ -42,5 +42,10 @@ AFRAME.registerComponent('main-camera', {
             .to({x: 0, y: 0, z: 0}, duration)
             .easing(TWEEN.Easing.Quadratic.InOut)
             .start();
+    },
+
+    toggleLookControls: function() {
+        var isEnabled = this.mainCamera.getAttribute('look-controls').magicWindowTrackingEnabled;
+        this.mainCamera.setAttribute('look-controls', 'magicWindowTrackingEnabled', !isEnabled);
     }
 });

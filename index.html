@@ -33,6 +33,10 @@
         var visibility = container.style.visibility;
         container.style.visibility = (visibility === 'visible') ? 'hidden' : 'visible';
       }
+
+      function toggleLookControls() {
+        document.getElementById('mainCameraWrapper').components['main-camera'].toggleLookControls();
+      }
     </script>
 
     <style>
@@ -78,6 +82,15 @@
         border:2px solid #000; /* And give it a border                                                            */
         z-index:100000;        /* Set z-index to 1 more than that of the overlay so the popup is over the overlay */
       }
+
+      #lock-button {
+        display: flex;
+        position: fixed;
+        visibility: visible;
+        left: 10px;
+        bottom: 10px;
+        z-index: 1;
+      }
     </style>
   </head>
 
@@ -94,7 +107,11 @@
     <div id="product-1-popup">
       Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
     </div>
-    <div id="overlay"></div>
+      <div id="overlay"></div>
+
+      <div id="lock-button">
+        <button onclick="toggleLookControls()">Lock</button>
+      </div>
 
     <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]" background="color: #b4cdc2">
       <a-assets>
