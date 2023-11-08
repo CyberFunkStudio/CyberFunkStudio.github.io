@@ -1,4 +1,4 @@
-AFRAME.registerComponent('3d-interaction', {
+AFRAME.registerComponent('clickable', {
     init: function() {
         var el = this.el;
         this.isClicked = false;
