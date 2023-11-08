@@ -91,8 +91,7 @@
       <button onclick="setState('Products')">Product</button>
     </div>
 
-    <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]">
-
+    <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]" background="color: #b4cdc2">
       <a-assets>
         <a-asset-item id="karton-model" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item> 
       </a-assets>
@@ -362,9 +361,6 @@
         Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
       </div>
       <div id="overlay"></div>
-
-      <!-- Background color -->
-      <a-scene background="color: #b4cdc2"></a-scene>
     </a-scene>
   </body>
 </html>
