@@ -1,7 +1,8 @@
 AFRAME.registerComponent('main-camera', {
     init: function() {
-        this.mainCamera = this.el.children[0];
         var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
+
+        this.mainCamera = this.el.children[0];
         
         this.mainCamera.setAttribute('wasd-controls', 'enabled', false);    
         this.mainCamera.setAttribute('fov', fov);
