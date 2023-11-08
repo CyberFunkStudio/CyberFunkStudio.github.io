@@ -65,7 +65,7 @@
         z-index:99999;   /* Change the z-index so it will be above everything else                  */
       }
 
-      #Product-1-Popup {
+      #product-1-popup {
         display:none;
         position:fixed;
         left:50%;              /* left and top here position top left page                                        */
@@ -90,6 +90,11 @@
       <button onclick="setState('Contact')">Contact</button>
       <button onclick="setState('Products')">Product</button>
     </div>
+
+    <div id="product-1-popup">
+      Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
+    </div>
+    <div id="overlay"></div>
 
     <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]" background="color: #b4cdc2">
       <a-assets>
@@ -247,7 +252,7 @@
         scale="1 1 1"
         visible="true"
         text-field
-        ui-text-popup="popupId: Product-1-Popup"
+        ui-text-popup="popupId: product-1-popup"
         mouse-reaction>
       </a-entity>
 
@@ -356,11 +361,6 @@
         mouse-reaction
         text-field>
       </a-entity>
-
-      <div id="Product-1-Popup">
-        Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
-      </div>
-      <div id="overlay"></div>
     </a-scene>
   </body>
 </html>
