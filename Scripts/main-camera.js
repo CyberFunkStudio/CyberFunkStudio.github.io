@@ -1,7 +1,8 @@
 AFRAME.registerComponent('main-camera', {
     init: function() {
-        this.mainCamera = this.el.children[0];
         var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
+
+        this.mainCamera = this.el.children[0];
         
         this.mainCamera.setAttribute('wasd-controls', 'enabled', false);    
         this.mainCamera.setAttribute('fov', fov);
@@ -41,5 +42,10 @@ AFRAME.registerComponent('main-camera', {
             .to({x: 0, y: 0, z: 0}, duration)
             .easing(TWEEN.Easing.Quadratic.InOut)
             .start();
+    },
+
+    toggleLookControls: function() {
+        var isEnabled = this.mainCamera.getAttribute('look-controls').magicWindowTrackingEnabled;
+        this.mainCamera.setAttribute('look-controls', 'magicWindowTrackingEnabled', !isEnabled);
     }
 });

@@ -28,10 +28,14 @@
         document.getElementById('scene').components['game-state'].setState(state);
       };
 
-      function toggleMenu(){
+      function toggleMenu() {
         var container = document.getElementById('button-container');
         var visibility = container.style.visibility;
         container.style.visibility = (visibility === 'visible') ? 'hidden' : 'visible';
+      }
+
+      function toggleLookControls() {
+        document.getElementById('mainCameraWrapper').components['main-camera'].toggleLookControls();
       }
     </script>
 
@@ -65,7 +69,7 @@
         z-index:99999;   /* Change the z-index so it will be above everything else                  */
       }
 
-      #Product-1-Popup {
+      #product-1-popup {
         display:none;
         position:fixed;
         left:50%;              /* left and top here position top left page                                        */
@@ -77,6 +81,15 @@
         background:#FFFFFF;    /* Background of white                                                             */
         border:2px solid #000; /* And give it a border                                                            */
         z-index:100000;        /* Set z-index to 1 more than that of the overlay so the popup is over the overlay */
+      }
+
+      #lock-button {
+        display: flex;
+        position: fixed;
+        visibility: visible;
+        left: 10px;
+        bottom: 10px;
+        z-index: 1;
       }
     </style>
   </head>
@@ -91,8 +104,16 @@
       <button onclick="setState('Products')">Product</button>
     </div>
 
-    <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]">
+    <div id="product-1-popup">
+      Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
+    </div>
+      <div id="overlay"></div>
 
+      <div id="lock-button">
+        <button onclick="toggleLookControls()">Lock</button>
+      </div>
+
+    <a-scene id="scene" cursor="rayOrigin: mouse" stats game-state raycaster="objects: [data-raycastable]" background="color: #b4cdc2">
       <a-assets>
         <a-asset-item id="karton-model" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item> 
       </a-assets>
@@ -248,7 +269,7 @@
         scale="1 1 1"
         visible="true"
         text-field
-        ui-text-popup="popupId: Product-1-Popup"
+        ui-text-popup="popupId: product-1-popup"
         mouse-reaction>
       </a-entity>
 
@@ -357,14 +378,6 @@
         mouse-reaction
         text-field>
       </a-entity>
-
-      <div id="Product-1-Popup">
-        Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled by the element itself.
-      </div>
-      <div id="overlay"></div>
-
-      <!-- Background color -->
-      <a-scene background="color: #b4cdc2"></a-scene>
     </a-scene>
   </body>
 </html>
