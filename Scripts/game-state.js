@@ -10,13 +10,14 @@ AFRAME.registerComponent('game-state', {
     },
 
     setState: function(state) {
-        this.state = GameStates.Matching(state);
+        var newState = GameStates.Matching(state);
+        this.state = this.state != newState ? newState : GameStates.Home;
 
         var pos = this.state.position;
         var rot = this.state.rotation;
         var rigRot = this.state.rigRotation;
 
-        this.setTextFieldVisibility(state);
+        this.setTextFieldVisibility(this.state);
         this.setCameraPosition(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, this.animationDuration_ms);
         this.setRigRotation(rigRot.x, rigRot.y, rigRot.z, this.animationDuration_ms);
     },
