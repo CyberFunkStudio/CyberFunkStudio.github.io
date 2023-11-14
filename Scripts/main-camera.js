@@ -2,14 +2,30 @@ AFRAME.registerComponent('main-camera', {
     init: function() {
         var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
 
+        this.initialRotationCounter = 0;
+        this.initialRotationMax = 30;
+        this.rotateTowardsStep_rad = 0.015;
+
         this.cameraEntity = this.el.children[0];
+        this.cameraObject = this.cameraEntity.components['camera'].camera;
         
         this.cameraEntity.setAttribute('wasd-controls', 'enabled', false);    
         this.cameraEntity.setAttribute('fov', fov);
     },
     
     tick: function() {
+        if (this.initialRotationCounter++ < this.initialRotationMax)
+        {
+            this.rotateTowardsZero();
+        }
+        
         TWEEN.update();
+    },
+
+    rotateTowardsZero: function() {
+        const quaternion = new THREE.Quaternion();        
+        this.cameraObject.getWorldQuaternion(quaternion);
+        this.cameraObject.quaternion.rotateTowards(quaternion.invert(), this.rotateTowardsStep_rad);
     },
 
     setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
