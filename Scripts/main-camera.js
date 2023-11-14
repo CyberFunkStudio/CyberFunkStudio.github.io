@@ -2,10 +2,10 @@ AFRAME.registerComponent('main-camera', {
     init: function() {
         var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
 
-        this.mainCamera = this.el.children[0];
+        this.cameraEntity = this.el.children[0];
         
-        this.mainCamera.setAttribute('wasd-controls', 'enabled', false);    
-        this.mainCamera.setAttribute('fov', fov);
+        this.cameraEntity.setAttribute('wasd-controls', 'enabled', false);    
+        this.cameraEntity.setAttribute('fov', fov);
     },
     
     tick: function() {
@@ -32,7 +32,7 @@ AFRAME.registerComponent('main-camera', {
     },
 
     resetLookControls: function(duration) {
-        var lookControls = this.mainCamera.components['look-controls'];
+        var lookControls = this.cameraEntity.components['look-controls'];
 
         new TWEEN.Tween(lookControls.pitchObject.rotation)
             .to({x: 0, y: 0, z: 0}, duration)
@@ -45,7 +45,7 @@ AFRAME.registerComponent('main-camera', {
     },
 
     toggleLookControls: function() {
-        var isEnabled = this.mainCamera.getAttribute('look-controls').magicWindowTrackingEnabled;
-        this.mainCamera.setAttribute('look-controls', 'magicWindowTrackingEnabled', !isEnabled);
+        var isEnabled = this.cameraEntity.getAttribute('look-controls').magicWindowTrackingEnabled;
+        this.cameraEntity.setAttribute('look-controls', 'magicWindowTrackingEnabled', !isEnabled);
     }
 });
