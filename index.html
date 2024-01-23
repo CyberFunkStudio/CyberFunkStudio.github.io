@@ -61,10 +61,30 @@
 
     window.addEventListener('resize', updateLayout);
 
-    function toggleLookControls() {
-      const cameraEl = document.getElementById('mainCamera');
-      const lookControlsEnabled = cameraEl.getAttribute('look-controls').enabled;
-      cameraEl.setAttribute('look-controls', 'enabled', !lookControlsEnabled);
+    function onControlVRMode() {
+      var cameraEl = document.getElementById('mainCamera');
+      if (cameraEl) {
+        var lookControls = cameraEl.getAttribute('look-controls');
+        cameraEl.setAttribute('look-controls', 'enabled', !lookControls.enabled);
+
+        // Reset the gyroscope and camera rotation
+        resetGyroscopeZeroPoint(cameraEl);
+
+        var initialRotation = cameraEl.getAttribute('rotation');
+        cameraEl.setAttribute('rotation', initialRotation);
+      } else {
+        console.error('mainCamera element not found');
+      }
+    }
+
+    function resetGyroscopeZeroPoint(cameraEl) {
+      cameraEl.setAttribute('rotation', '0 0 0');
+
+      var lookControlsComponent = cameraEl.components['look-controls'];
+      if (lookControlsComponent) {
+        lookControlsComponent.pitchObject.rotation.set(0, 0, 0);
+        lookControlsComponent.yawObject.rotation.set(0, 0, 0);
+      }
     }
 
     function toggleMenu() {
@@ -101,7 +121,6 @@
         }
       }
     }
-
   </script>
 
   <style>
@@ -193,7 +212,7 @@
   <div id="overlay"></div>
 
   <div id="lock-button">
-    <button onclick="toggleLookControls()">Lock</button>
+    <button onclick="onControlVRMode()">TransformVRMode</button>
   </div>
 
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"

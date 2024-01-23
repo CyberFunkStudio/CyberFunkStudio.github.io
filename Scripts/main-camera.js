@@ -1,6 +1,5 @@
 AFRAME.registerComponent('main-camera', {
     init: function () {
-        // Bind the methods that actually exist
         this.onEnterVRHandler = this.onEnterVR.bind(this);
         this.onExitVRHandler = this.onExitVR.bind(this);
 
@@ -22,8 +21,6 @@ AFRAME.registerComponent('main-camera', {
     onEnterVR: function () {
         const isMobileVR = AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobile();
         if (isMobileVR) {
-            // Set the camera's rotation to match the predefined position.
-            // Note: This should be the same as setting it in non-VR mode.
             this.initialRotation = this.el.getAttribute('rotation');
             this.el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
             this.setInitialCameraRotation();
@@ -32,8 +29,22 @@ AFRAME.registerComponent('main-camera', {
 
     onExitVR: function () {
         if (this.initialRotation) {
+            // On exiting VR, reset camera rotation as well as gyroscope zero point
             this.el.setAttribute('rotation', this.initialRotation);
-            // If your VR mode adjusts the global orientation (for example, in Three.js), reset it here as needed
+            this.resetGyroscopeZeroPoint();
+        }
+    },
+
+
+    resetGyroscopeZeroPoint: function () {
+        // Reset camera rotation
+        this.el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+
+        // If using look-controls, reset pitch and yaw orientation
+        if (this.el.components['look-controls']) {
+            var lookControls = this.el.components['look-controls'];
+            lookControls.pitchObject.rotation.set(0, 0, 0);
+            lookControls.yawObject.rotation.set(0, 0, 0);
         }
     },
 
