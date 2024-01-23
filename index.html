@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <!-- External sources -->
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script>
   <script src="https://unpkg.com/@tweenjs/tween.js@^20.0.0/dist/tween.umd.js"></script>
 
@@ -20,7 +20,6 @@
   <script src="Scripts/text-field.js"></script>
   <script src="Scripts/mouse-reaction.js"></script>
   <script src="Scripts/ui-text-popup.js"></script>
-  <script src="Scripts/handle-dragging.js"></script>
 
   <script>
     function setState(state) {
@@ -61,30 +60,12 @@
 
     window.addEventListener('resize', updateLayout);
 
-    function onControlVRMode() {
-      var cameraEl = document.getElementById('mainCamera');
-      if (cameraEl) {
-        var lookControls = cameraEl.getAttribute('look-controls');
-        cameraEl.setAttribute('look-controls', 'enabled', !lookControls.enabled);
+    function toggleLookControls() {
+      const cameraEl = document.getElementById('mainCamera');
+      const lookControlsEnabled = cameraEl.getAttribute('look-controls').enabled;
+      cameraEl.setAttribute('look-controls', 'enabled', !lookControlsEnabled);
 
-        // Reset the gyroscope and camera rotation
-        resetGyroscopeZeroPoint(cameraEl);
-
-        var initialRotation = cameraEl.getAttribute('rotation');
-        cameraEl.setAttribute('rotation', initialRotation);
-      } else {
-        console.error('mainCamera element not found');
-      }
-    }
-
-    function resetGyroscopeZeroPoint(cameraEl) {
       cameraEl.setAttribute('rotation', '0 0 0');
-
-      var lookControlsComponent = cameraEl.components['look-controls'];
-      if (lookControlsComponent) {
-        lookControlsComponent.pitchObject.rotation.set(0, 0, 0);
-        lookControlsComponent.yawObject.rotation.set(0, 0, 0);
-      }
     }
 
     function toggleMenu() {
@@ -121,6 +102,7 @@
         }
       }
     }
+
   </script>
 
   <style>
@@ -212,11 +194,11 @@
   <div id="overlay"></div>
 
   <div id="lock-button">
-    <button onclick="onControlVRMode()">TransformVRMode</button>
+    <button onclick="toggleLookControls()">Lock</button>
   </div>
 
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"
-    background="color: #b4cdc2" obb-collider="showColliders: false">
+    background="color: #b4cdc2">
     <a-assets>
       <a-asset-item id="karton-model" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item>
     </a-assets>
@@ -227,7 +209,7 @@
 
     <!--camera animation-->
     <a-entity id="rig">
-      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="acceleration:100">
+      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera>
         <a-camera id="mainCamera" look-controls-enabled="false" custom-look-controls></a-camera>
       </a-entity>
     </a-entity>
@@ -274,7 +256,7 @@
     <!-- Contact-TextField. Should appear when contact button is clicked -->
     <a-entity id='Contact-Textfield'
       text="value: short statement\n to facilitate contact; color: #000; align: center; width: 1"
-      geometry="primitive: plane; height: 0.12; width: 0.5" material="color: #FFF" position="-0.5 4.55 1.3"
+      geometry="primitive: plane; height: 0.2; width: 0.5" material="color: #FFF" position="-0.5 4.55 1.3"
       rotation="0 -30 0" scale="1 1 1" visible="false" text-field>
     </a-entity>
 

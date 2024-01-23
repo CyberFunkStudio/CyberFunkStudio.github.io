@@ -1,84 +1,67 @@
 AFRAME.registerComponent('main-camera', {
-    init: function () {
-        this.onEnterVRHandler = this.onEnterVR.bind(this);
-        this.onExitVRHandler = this.onExitVR.bind(this);
+    init: function() {
+        var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
 
-        this.el.sceneEl.addEventListener('enter-vr', this.onEnterVRHandler);
-        this.el.sceneEl.addEventListener('exit-vr', this.onExitVRHandler);
+        this.initialRotationCounter = 0;
+        this.initialRotationMax = 30;
+        this.rotateTowardsStep_rad = 0.015;
+
+        this.cameraEntity = this.el.children[0];
+        this.cameraObject = this.cameraEntity.components['camera'].camera;
+        
+        this.cameraEntity.setAttribute('wasd-controls', 'enabled', false);    
+        this.cameraEntity.setAttribute('fov', fov);
     },
-
-    bindMethods: function () {
-        this.onEnterVR = this.onEnterVR.bind(this);
-        this.onExitVR = this.onExitVR.bind(this);
-    },
-
-    addEventListeners: function () {
-        var sceneEl = this.el.sceneEl;
-        sceneEl.addEventListener('enter-vr', this.onEnterVR);
-        sceneEl.addEventListener('exit-vr', this.onExitVR);
-    },
-
-    onEnterVR: function () {
-        const isMobileVR = AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobile();
-        if (isMobileVR) {
-            this.initialRotation = this.el.getAttribute('rotation');
-            this.el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-            this.setInitialCameraRotation();
+    
+    tick: function() {
+        if (this.initialRotationCounter++ < this.initialRotationMax)
+        {
+            this.rotateTowardsZero();
         }
+        
+        TWEEN.update();
     },
 
-    onExitVR: function () {
-        if (this.initialRotation) {
-            // On exiting VR, reset camera rotation as well as gyroscope zero point
-            this.el.setAttribute('rotation', this.initialRotation);
-            this.resetGyroscopeZeroPoint();
-        }
+    rotateTowardsZero: function() {
+        const quaternion = new THREE.Quaternion();        
+        this.cameraObject.getWorldQuaternion(quaternion);
+        this.cameraObject.quaternion.rotateTowards(quaternion.invert(), this.rotateTowardsStep_rad);
     },
 
+    setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
+        var wrapper = this.el;
 
-    resetGyroscopeZeroPoint: function () {
-        // Reset camera rotation
-        this.el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-
-        // If using look-controls, reset pitch and yaw orientation
-        if (this.el.components['look-controls']) {
-            var lookControls = this.el.components['look-controls'];
-            lookControls.pitchObject.rotation.set(0, 0, 0);
-            lookControls.yawObject.rotation.set(0, 0, 0);
-        }
-    },
-
-    setInitialCameraRotation: function () {
-        // Replace with your intended default configuration.
-        var initialRotation = new THREE.Vector3(0, -90, 0); // Adjust as needed further
-        this.el.setAttribute('rotation', initialRotation);
-
-        // If using look-controls, reset magic window tracking to the initial position.
-        if (this.cameraEntity.components['look-controls']) {
-            var lookControls = this.cameraEntity.components['look-controls'];
-            lookControls.pitchObject.rotation.set(THREE.Math.degToRad(initialRotation.x), 0, 0);
-            lookControls.yawObject.rotation.set(0, THREE.Math.degToRad(initialRotation.y), 0);
-        }
-    },
-
-    setCameraPosition: function (x, y, z, rx, ry, rz, duration) {
-        // Animate the camera rig position
-        this.el.setAttribute('animation__pos', {
+        wrapper.setAttribute('animation__position', {
             property: 'position',
-            to: `${x} ${y} ${z}`,
-            dur: duration
+            to: {x: x, y: y, z: z},
+            dur: duration,
+            easing: 'easeInOutQuad'
         });
-        // Animate the camera rig rotation
-        this.el.setAttribute('animation__rot', {
+        wrapper.setAttribute('animation__rotation', {
             property: 'rotation',
-            to: `${rx} ${ry} ${rz}`,
-            dur: duration
+            to: {x: rx, y: ry, z: rz},
+            dur: duration,
+            easing: 'easeInOutQuad'
         });
+
+        this.resetLookControls(duration);
     },
 
-    remove: function () {
-        var sceneEl = this.el.sceneEl;
-        sceneEl.removeEventListener('enter-vr', this.onEnterVR);
-        sceneEl.removeEventListener('exit-vr', this.onExitVR);
+    resetLookControls: function(duration) {
+        var lookControls = this.cameraEntity.components['look-controls'];
+
+        new TWEEN.Tween(lookControls.pitchObject.rotation)
+            .to({x: 0, y: 0, z: 0}, duration)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .start();
+        new TWEEN.Tween(lookControls.yawObject.rotation)
+            .to({x: 0, y: 0, z: 0}, duration)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .start();
     },
+
+    toggleLookControls: function() {
+        var isEnabled = this.cameraEntity.getAttribute('look-controls').magicWindowTrackingEnabled;
+        this.cameraEntity.setAttribute('look-controls', 'magicWindowTrackingEnabled', !isEnabled);
+    }
 });
