@@ -11,6 +11,7 @@
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script>
   <script src="https://unpkg.com/@tweenjs/tween.js@^20.0.0/dist/tween.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Internal sources -->
   <script src="Scripts/clickable.js"></script>
@@ -20,10 +21,15 @@
   <script src="Scripts/text-field.js"></script>
   <script src="Scripts/mouse-reaction.js"></script>
   <script src="Scripts/ui-text-popup.js"></script>
+  <script src="Scripts/products.js"></script>
 
   <script>
     function setState(state) {
       document.getElementById('scene').components['game-state'].setState(state);
+
+      if (state === 'Home') {
+        document.getElementById('menu-button').click();
+      }
     };
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -91,6 +97,10 @@
         }
       };
 
+      updateContactTextFields(isMobile);
+
+      updateMaxxAndAnnaTextFields(isMobile);
+
       // Choose the set of positions based on whether it's mobile or desktop
       const chosenPositions = isMobile ? positions.mobile : positions.desktop;
 
@@ -103,10 +113,34 @@
       }
     }
 
+    function updateContactTextFields(isMobile) {
+      const desktopX = '-0.3';
+      const mobileX = '-0.8';
+      const newX = isMobile ? mobileX : desktopX;
+
+      document.getElementById('Contact-Textfield').setAttribute('position', newX + ' 4.55 1.3');
+      document.getElementById('Mail-Textfield').setAttribute('position', newX + ' 4.39 1.3');
+      document.getElementById('Telephone-Textfield').setAttribute('position', newX + ' 4.3 1.3');
+      document.getElementById('Telephone-Textfield').setAttribute('position', newX + ' 4.3 1.3');
+    }
+
+    function updateMaxxAndAnnaTextFields(isMobile) {
+      const positionMaxx = isMobile ? '-1.3 3.0 -1.65' : '-1 2.6 -0.9';
+      const positionAnna = isMobile ? '-1.35 2.4 -1.15' : '-1.35 2.6 -1.9';
+      const scale = isMobile ? '0.8 0.8 0.8' : '1 1 1';
+
+      document.getElementById('About-Maxx').setAttribute('position', positionMaxx);
+      document.getElementById('About-Maxx').setAttribute('scale', scale);
+
+      document.getElementById('About-Anna').setAttribute('position', positionAnna);
+      document.getElementById('About-Anna').setAttribute('scale', scale);
+
+    }
+
   </script>
 
   <style>
-    #button-container {
+    /* #button-container {
       position: fixed;
       top: 40px;
       right: 10px;
@@ -114,6 +148,56 @@
       display: flex;
       flex-direction: column;
       visibility: hidden;
+    } */
+
+    #button-container {
+      position: fixed;
+      top: 10px;
+      width: 100%;
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      /* Default flex direction for desktop */
+      justify-content: space-between;
+      /* Space out buttons evenly on desktop */
+      padding: 0 10px;
+      visibility: hidden;
+      /* Initially hidden until toggled */
+    }
+
+    #button-container button {
+      flex: 1;
+      margin: 0 70px;
+      height: 80px;
+    }
+
+    @media (max-width: 600px) {
+      #button-container {
+        flex-direction: column;
+        top: 30px;
+        bottom: 10px;
+        height: 100vh;
+        justify-content: space-between;
+      }
+
+      #top-buttons,
+      #bottom-buttons {
+        flex-direction: row;
+        margin-bottom: 50px;
+      }
+
+      #button-container button {
+        margin: 0 30px;
+        height: 60px;
+      }
+
+      #lock-button {
+        left: 30px;
+        bottom: 150px;
+        z-index: 1;
+        position: fixed;
+        display: flex;
+      }
     }
 
     #menu-button {
@@ -166,13 +250,12 @@
       /* Set z-index to 1 more than that of the overlay so the popup is over the overlay */
     }
 
-    #lock-button {
+    #top-buttons,
+    #bottom-buttons {
       display: flex;
-      position: fixed;
-      visibility: visible;
-      left: 10px;
-      bottom: 10px;
-      z-index: 1;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
     }
   </style>
 </head>
@@ -181,10 +264,17 @@
   <button id="menu-button" onclick="toggleMenu()">Menu</button>
 
   <div id="button-container">
-    <button onclick="setState('Home')">Home</button>
-    <button onclick="setState('Team')">Team</button>
-    <button onclick="setState('Contact')">Contact</button>
-    <button onclick="setState('Products')">Product</button>
+    <!-- Top Buttons -->
+    <div id="top-buttons">
+      <button className="menu-button" onclick="setState('Home')">Home</button>
+      <button className="menu-button" onclick="setState('Team')">Team</button>
+    </div>
+
+    <!-- Bottom Buttons -->
+    <div id="bottom-buttons">
+      <button className="menu-button" onclick="setState('Contact')">Contact</button>
+      <button className="menu-button" onclick="setState('Products')">Product</button>
+    </div>
   </div>
 
   <div id="product-1-popup">
@@ -194,7 +284,7 @@
   <div id="overlay"></div>
 
   <div id="lock-button">
-    <button onclick="toggleLookControls()">Lock</button>
+    <button onclick="toggleLookControls()">VR</button>
   </div>
 
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"
@@ -209,7 +299,7 @@
 
     <!--camera animation-->
     <a-entity id="rig">
-      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera>
+      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="acceleration:100">
         <a-camera id="mainCamera" look-controls-enabled="false" custom-look-controls></a-camera>
       </a-entity>
     </a-entity>
@@ -236,15 +326,15 @@
     <!-- Maxx-TextField -->
     <a-entity id='About-Maxx'
       text="value: Maxx-Text\n A brief summary of\n Maxx' persona; color: #000; align: center; width: 0.7"
-      geometry="primitive: plane; height: 0.6; width: 0.3" material="color: #FFF" position="-1 2.6 -0.9"
-      rotation="0 -70 0" scale="1 1 1" visible="true" text-field>
+      geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.3 3.2 -1.65"
+      rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
     </a-entity>
 
     <!-- Anna-TextField -->
     <a-entity id='About-Anna'
       text="value: Anna-Text\n A brief summary of\n Anna's persona; color: #000; align: center; width: 0.7"
-      geometry="primitive: plane; height: 0.6; width: 0.3" material="color: #FFF" position="-1.35 2.6 -1.9"
-      rotation="0 -70 0" scale="1 1 1" visible="true" text-field>
+      geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.35 2.4 -1.15"
+      rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
     </a-entity>
 
     <!-- Contact 3D button-->
@@ -280,49 +370,29 @@
     </a-entity>
 
     <!-- Product-Buttons. They name the displayed products and will open a description textfield on click -->
-    <a-entity id='Product-1' class="Raycastable" text="value: Product 1; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0 1.5 1.5" rotation="0 20 0"
-      scale="1 1 1" visible="true" text-field ui-text-popup="popupId: product-1-popup" mouse-reaction>
-    </a-entity>
 
-    <a-entity id='Product-2' class="Raycastable" text="value: Product 2; color: #000; align: center; width: 0.5"
+    <a-entity id='Product-1' class="products Raycastable" text="value: Product 1; color: #000; align: center; width: 0.5"
       geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.3 1.5 1.35"
-      rotation="0 20 0" scale="1 1 1" visible="true" clickable mouse-reaction text-field>
+      rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
     </a-entity>
 
-    <a-entity id='Product-3' class="Raycastable" text="value: Product 3; color: #000; align: center; width: 0.5"
+    <a-entity id='Product-2' class="products Raycastable" text="value: Product 2; color: #000; align: center; width: 0.5"
       geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.6 1.5 1.20"
-      rotation="0 20 0" scale="1 1 1" visible="true" clickable mouse-reaction text-field>
-    </a-entity>
-
-    <a-entity id='Product-4' class="Raycastable" text="value: Product 4; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.9 1.5 1.05"
-      rotation="0 20 0" scale="1 1 1" visible="true" clickable mouse-reaction text-field>
+      rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
     </a-entity>
 
     <!-- locked products -->
-    <a-entity id='LockedProduct-1' class="Raycastable"
-      text="value: locked Product 1; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0 1.3 1.5" rotation="0 20 0"
-      scale="1 1 1" visible="true" clickable mouse-reaction text-field>
-    </a-entity>
 
-    <a-entity id='LockedProduct-2' class="Raycastable"
-      text="value: locked Product 2; color: #000; align: center; width: 0.5"
+    <a-entity id='Product-3' class="products Raycastable"
+      text="value: Product 3; color: #000; align: center; width: 0.5"
       geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.3 1.3 1.35"
-      rotation="0 20 0" scale="1 1 1" visible="true" clickable mouse-reaction text-field>
+      rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
     </a-entity>
 
-    <a-entity id='LockedProduct-3' class="Raycastable"
-      text="value: locked Product 3; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.6 1.3 1.20"
-      rotation="0 20 0" scale="1 1 1" visible="true" clickable mouse-reaction text-field>
-    </a-entity>
-
-    <a-entity id='LockedProduct-4' class="Raycastable"
-      text="value: locked Product 4; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.9 1.3 1.05"
-      rotation="0 20 0" scale="1 1 1" visible="true" clickable mouse-reaction text-field>
+    <a-entity id='Product-4' class="products Raycastable"
+      text="value: Product 4; color: #000; align: center; width: 0.5"
+      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.6 1.3 1.20" scale="1 1 1"
+      rotation="0 20 0" visible="true"  mouse-reaction text-field>
     </a-entity>
   </a-scene>
 </body>
