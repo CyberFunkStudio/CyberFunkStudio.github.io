@@ -1,67 +1,73 @@
 AFRAME.registerComponent('main-camera', {
-    init: function() {
-        var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
+    init: function () {
+        // Bind the methods that actually exist
+        this.onEnterVRHandler = this.onEnterVR.bind(this);
+        this.onExitVRHandler = this.onExitVR.bind(this);
 
-        this.initialRotationCounter = 0;
-        this.initialRotationMax = 30;
-        this.rotateTowardsStep_rad = 0.015;
-
-        this.cameraEntity = this.el.children[0];
-        this.cameraObject = this.cameraEntity.components['camera'].camera;
-        
-        this.cameraEntity.setAttribute('wasd-controls', 'enabled', false);    
-        this.cameraEntity.setAttribute('fov', fov);
+        this.el.sceneEl.addEventListener('enter-vr', this.onEnterVRHandler);
+        this.el.sceneEl.addEventListener('exit-vr', this.onExitVRHandler);
     },
-    
-    tick: function() {
-        if (this.initialRotationCounter++ < this.initialRotationMax)
-        {
-            this.rotateTowardsZero();
+
+    bindMethods: function () {
+        this.onEnterVR = this.onEnterVR.bind(this);
+        this.onExitVR = this.onExitVR.bind(this);
+    },
+
+    addEventListeners: function () {
+        var sceneEl = this.el.sceneEl;
+        sceneEl.addEventListener('enter-vr', this.onEnterVR);
+        sceneEl.addEventListener('exit-vr', this.onExitVR);
+    },
+
+    onEnterVR: function () {
+        const isMobileVR = AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobile();
+        if (isMobileVR) {
+            // Set the camera's rotation to match the predefined position.
+            // Note: This should be the same as setting it in non-VR mode.
+            this.initialRotation = this.el.getAttribute('rotation');
+            this.el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+            this.setInitialCameraRotation();
         }
-        
-        TWEEN.update();
     },
 
-    rotateTowardsZero: function() {
-        const quaternion = new THREE.Quaternion();        
-        this.cameraObject.getWorldQuaternion(quaternion);
-        this.cameraObject.quaternion.rotateTowards(quaternion.invert(), this.rotateTowardsStep_rad);
+    onExitVR: function () {
+        if (this.initialRotation) {
+            this.el.setAttribute('rotation', this.initialRotation);
+            // If your VR mode adjusts the global orientation (for example, in Three.js), reset it here as needed
+        }
     },
 
-    setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
-        var wrapper = this.el;
+    setInitialCameraRotation: function () {
+        // Replace with your intended default configuration.
+        var initialRotation = new THREE.Vector3(0, -90, 0); // Adjust as needed further
+        this.el.setAttribute('rotation', initialRotation);
 
-        wrapper.setAttribute('animation__position', {
+        // If using look-controls, reset magic window tracking to the initial position.
+        if (this.cameraEntity.components['look-controls']) {
+            var lookControls = this.cameraEntity.components['look-controls'];
+            lookControls.pitchObject.rotation.set(THREE.Math.degToRad(initialRotation.x), 0, 0);
+            lookControls.yawObject.rotation.set(0, THREE.Math.degToRad(initialRotation.y), 0);
+        }
+    },
+
+    setCameraPosition: function (x, y, z, rx, ry, rz, duration) {
+        // Animate the camera rig position
+        this.el.setAttribute('animation__pos', {
             property: 'position',
-            to: {x: x, y: y, z: z},
-            dur: duration,
-            easing: 'easeInOutQuad'
+            to: `${x} ${y} ${z}`,
+            dur: duration
         });
-        wrapper.setAttribute('animation__rotation', {
+        // Animate the camera rig rotation
+        this.el.setAttribute('animation__rot', {
             property: 'rotation',
-            to: {x: rx, y: ry, z: rz},
-            dur: duration,
-            easing: 'easeInOutQuad'
+            to: `${rx} ${ry} ${rz}`,
+            dur: duration
         });
-
-        this.resetLookControls(duration);
     },
 
-    resetLookControls: function(duration) {
-        var lookControls = this.cameraEntity.components['look-controls'];
-
-        new TWEEN.Tween(lookControls.pitchObject.rotation)
-            .to({x: 0, y: 0, z: 0}, duration)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-            .start();
-        new TWEEN.Tween(lookControls.yawObject.rotation)
-            .to({x: 0, y: 0, z: 0}, duration)
-            .easing(TWEEN.Easing.Quadratic.InOut)
-            .start();
+    remove: function () {
+        var sceneEl = this.el.sceneEl;
+        sceneEl.removeEventListener('enter-vr', this.onEnterVR);
+        sceneEl.removeEventListener('exit-vr', this.onExitVR);
     },
-
-    toggleLookControls: function() {
-        var isEnabled = this.cameraEntity.getAttribute('look-controls').magicWindowTrackingEnabled;
-        this.cameraEntity.setAttribute('look-controls', 'magicWindowTrackingEnabled', !isEnabled);
-    }
 });
