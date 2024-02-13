@@ -66,6 +66,7 @@
       const rig = document.querySelector('#rig');
       const camera = document.querySelector('#mainCamera');
       const isMobile = AFRAME.utils.device.isMobile();
+      const isTablet = AFRAME.utils.device.isTablet();
 
       const resetCameraRotation = () => {
         rig.setAttribute('rotation', { x: 0, y: 0, z: 0 });
@@ -74,7 +75,7 @@
         camera.components['look-controls'].yawObject.rotation.set(0, 0, 0);
       };
 
-      if (isMobile) {
+      if (isMobile || isTablet) {
         document.querySelectorAll('[clickable]').forEach(entity => {
           entity.addEventListener('click', function () {
             resetCameraRotation();
@@ -82,6 +83,10 @@
           });
         });
 
+        document.getElementById("lock-button").style.position = "fixed"
+        document.getElementById("lock-button").style.left = "50px"
+        document.getElementById("lock-button").style.bottom = "150px"
+        document.getElementById("lock-button").style.zIndex = "1"
         camera.setAttribute('look-controls', 'enabled', false);
       } else {
         camera.setAttribute('look-controls', 'enabled', true);
