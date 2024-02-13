@@ -23,6 +23,7 @@
   <script src="Scripts/mouse-reaction.js"></script>
   <script src="Scripts/ui-text-popup.js"></script>
   <script src="Scripts/products.js"></script>
+  <script src="Scripts/mouse-flow.js"></script>
 
   <script>
  function handleMenuButtonClick(state) {
@@ -30,6 +31,20 @@
         setState(state);
       }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var sensitivitySlider = document.getElementById('sensitivity');
+      var sensitivityValueDisplay = document.getElementById('sensitivity-value');
+      var cameraEl = document.getElementById('mainCamera');
+
+      sensitivitySlider.addEventListener('input', function (evt) {
+        var newSensitivity = parseFloat(evt.target.value);
+        sensitivityValueDisplay.textContent = newSensitivity.toFixed(4);
+
+        cameraEl.setAttribute('mouse-flow-controls', 'sensitivity', newSensitivity);
+      });
+    });
+
     function updateMenuButtonState(activeState) {
       const buttons = document.getElementById("menu-buttons");
 
@@ -201,7 +216,10 @@
       }
 
     }
-
+    #controls {
+      position: fixed;
+      z-index: 1;
+    }
     #menu-button {
       position: fixed;
       top: 10px;
@@ -263,7 +281,12 @@
   </div>
   <div id="overlay"></div>
 
-  <div id="lock-button">
+  <div id="controls">
+    <label for="sensitivity">Sensitivity:</label>
+    <span id="sensitivity-value">0.0001</span>
+    <input type="range" id="sensitivity" name="sensitivity" min="0.00001" max="0.1" step="0.000001" value="0.00001" />
+  </div>
+  <div id="lock-button" class="flex">
     <button onclick="toggleLookControls()">VR</button>
   </div>
 
@@ -280,7 +303,7 @@
     <!--camera animation-->
     <a-entity id="rig">
       <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="acceleration:100">
-        <a-camera id="mainCamera" look-controls-enabled="false" custom-look-controls></a-camera>
+        <a-camera id="mainCamera" custom-look-controls mouse-flow-controls></a-camera>
       </a-entity>
     </a-entity>
 
