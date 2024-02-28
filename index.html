@@ -78,7 +78,6 @@
       if (isMobile || isTablet) {
         document.querySelectorAll('[clickable]').forEach(entity => {
           entity.addEventListener('click', function () {
-            resetCameraRotation();
             camera.setAttribute('look-controls', 'enabled', true);
           });
         });
