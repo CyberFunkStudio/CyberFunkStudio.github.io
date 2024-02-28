@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       Swal.fire({
         title: "<strong>All About</strong> "+event.target.id,
-        icon: "success",
         width: "80%",
         html: product_text,
         showCloseButton: true,
