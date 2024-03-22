@@ -26,24 +26,11 @@
   <script src="Scripts/mouse-flow.js"></script>
 
   <script>
- function handleMenuButtonClick(state) {
+    function handleMenuButtonClick(state) {
       if (!this.disabled) {
         setState(state);
       }
     }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      var sensitivitySlider = document.getElementById('sensitivity');
-      var sensitivityValueDisplay = document.getElementById('sensitivity-value');
-      var cameraEl = document.getElementById('mainCamera');
-
-      sensitivitySlider.addEventListener('input', function (evt) {
-        var newSensitivity = parseFloat(evt.target.value);
-        sensitivityValueDisplay.textContent = newSensitivity.toFixed(4);
-
-        cameraEl.setAttribute('mouse-flow-controls', 'sensitivity', newSensitivity);
-      });
-    });
 
     function updateMenuButtonState(activeState) {
       const buttons = document.getElementById("menu-buttons");
@@ -57,98 +44,11 @@
         }
       });
     }
+
     function setState(state) {
       document.getElementById('scene').components['game-state'].setState(state);
       updateMenuButtonState(state);
     };
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const rig = document.querySelector('#rig');
-      const camera = document.querySelector('#mainCamera');
-      const isMobile = AFRAME.utils.device.isMobile();
-      const isTablet = AFRAME.utils.device.isTablet();
-
-      const resetCameraRotation = () => {
-        rig.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-        camera.components['look-controls'].pitchObject.rotation.set(0, 0, 0);
-        camera.components['look-controls'].yawObject.rotation.set(0, 0, 0);
-      };
-
-      if (isMobile || isTablet) {
-        document.querySelectorAll('[clickable]').forEach(entity => {
-          entity.addEventListener('click', function () {
-            camera.setAttribute('look-controls', 'enabled', true);
-          });
-        });
-
-        document.getElementById("lock-button").style.position = "fixed"
-        document.getElementById("lock-button").style.left = "50px"
-        document.getElementById("lock-button").style.bottom = "150px"
-        document.getElementById("lock-button").style.zIndex = "1"
-        camera.setAttribute('look-controls', 'enabled', false);
-      } else {
-        camera.setAttribute('look-controls', 'enabled', true);
-      }
-
-
-     // here is the function to notify the user to tilt his phone back
-     const cameraEl = document.getElementById('mainCamera');
-     window.addEventListener('resize', function() {
-          if (cameraEl) {
-              if( window.innerWidth > 600 && AFRAME.utils.device.isMobile()){
-
-                    var fullScreenDiv = document.createElement('div');
-
-                    // Set styles to make the div fullscreen, with a green background, and high z-index
-                    fullScreenDiv.style.position = 'absolute';
-                    fullScreenDiv.style.top = '0';
-                    fullScreenDiv.style.left = '0';
-                    fullScreenDiv.style.width = '100%';
-                    fullScreenDiv.style.height = '100%';
-                    fullScreenDiv.style.backgroundColor = 'green';
-                    fullScreenDiv.style.zIndex = '9999';
-                    fullScreenDiv.style.display = 'flex';
-                    fullScreenDiv.style.justifyContent = 'center';
-                    fullScreenDiv.style.alignItems = 'center';
-                    fullScreenDiv.style.color = 'white';
-                    fullScreenDiv.style.fontSize = '24px';
-
-                    // Create the h1 element
-                    var message = document.createElement('h1');
-                    message.textContent = 'Please tilt your phone';
-
-                    // Add the h1 element to the div
-                    fullScreenDiv.appendChild(message);
-                    // Add the div to the body of the document, making it visible on the page
-                    document.body.appendChild(fullScreenDiv);
-
-              }else{
-                location.reload();
-              }
-              cameraEl.setAttribute('aspect', window.innerWidth / window.innerHeight);
-              // Adjust other scene properties as necessary
-          }
-      });
-
-
-    });
-
-    window.addEventListener('load', () => {
-      updateLayout();
-      const isMobile = AFRAME.utils.device.isMobile();
-      document.getElementById('mainCamera').setAttribute('look-controls', isMobile ? 'enabled: false' : 'enabled: true');
-    });
-
-    window.addEventListener('resize', updateLayout);
-
-    function toggleLookControls() {
-      const cameraEl = document.getElementById('mainCamera');
-      const lookControlsEnabled = cameraEl.getAttribute('look-controls').enabled;
-      cameraEl.setAttribute('look-controls', 'enabled', !lookControlsEnabled);
-
-      cameraEl.setAttribute('rotation', '0 0 0');
-    }
 
     function toggleMenu() {
       var container = document.getElementById('button-container');
@@ -210,9 +110,106 @@
 
       document.getElementById('About-Anna').setAttribute('position', positionAnna);
       document.getElementById('About-Anna').setAttribute('scale', scale);
-
     }
 
+    function toggleLookControls() {
+      const cameraEl = document.getElementById('mainCamera');
+      const lookControlsEnabled = cameraEl.getAttribute('look-controls').enabled;
+      cameraEl.setAttribute('look-controls', 'enabled', !lookControlsEnabled);
+
+      cameraEl.setAttribute('rotation', '0 0 0');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var sensitivitySlider = document.getElementById('sensitivity');
+      var sensitivityValueDisplay = document.getElementById('sensitivity-value');
+      var cameraEl = document.getElementById('mainCamera');
+
+      sensitivitySlider.addEventListener('input', function (evt) {
+        var newSensitivity = parseFloat(evt.target.value);
+        sensitivityValueDisplay.textContent = newSensitivity.toFixed(4);
+
+        cameraEl.setAttribute('mouse-flow-controls', 'sensitivity', newSensitivity);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const rig = document.querySelector('#rig');
+      const camera = document.querySelector('#mainCamera');
+      const isMobile = AFRAME.utils.device.isMobile();
+      const isTablet = AFRAME.utils.device.isTablet();
+
+      const resetCameraRotation = () => {
+        rig.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+        camera.components['look-controls'].pitchObject.rotation.set(0, 0, 0);
+        camera.components['look-controls'].yawObject.rotation.set(0, 0, 0);
+      };
+
+      if (isMobile || isTablet) {
+        document.querySelectorAll('[clickable]').forEach(entity => {
+          entity.addEventListener('click', function () {
+            camera.setAttribute('look-controls', 'enabled', true);
+          });
+        });
+
+        document.getElementById("lock-button").style.position = "fixed"
+        document.getElementById("lock-button").style.left = "50px"
+        document.getElementById("lock-button").style.bottom = "150px"
+        document.getElementById("lock-button").style.zIndex = "1"
+        camera.setAttribute('look-controls', 'enabled', false);
+      } else {
+        camera.setAttribute('look-controls', 'enabled', true);
+      }
+
+
+    // here is the function to notify the user to tilt his phone back
+    const cameraEl = document.getElementById('mainCamera');
+    window.addEventListener('resize', function() {
+        if (cameraEl) {
+            if( window.innerWidth > 600 && AFRAME.utils.device.isMobile()){
+
+                  var fullScreenDiv = document.createElement('div');
+
+                  // Set styles to make the div fullscreen, with a green background, and high z-index
+                  fullScreenDiv.style.position = 'absolute';
+                  fullScreenDiv.style.top = '0';
+                  fullScreenDiv.style.left = '0';
+                  fullScreenDiv.style.width = '100%';
+                  fullScreenDiv.style.height = '100%';
+                  fullScreenDiv.style.backgroundColor = 'green';
+                  fullScreenDiv.style.zIndex = '9999';
+                  fullScreenDiv.style.display = 'flex';
+                  fullScreenDiv.style.justifyContent = 'center';
+                  fullScreenDiv.style.alignItems = 'center';
+                  fullScreenDiv.style.color = 'white';
+                  fullScreenDiv.style.fontSize = '24px';
+
+                  // Create the h1 element
+                  var message = document.createElement('h1');
+                  message.textContent = 'Please tilt your phone';
+
+                  // Add the h1 element to the div
+                  fullScreenDiv.appendChild(message);
+                  // Add the div to the body of the document, making it visible on the page
+                  document.body.appendChild(fullScreenDiv);
+
+            }else{
+              location.reload();
+            }
+            cameraEl.setAttribute('aspect', window.innerWidth / window.innerHeight);
+            // Adjust other scene properties as necessary
+        }
+      });
+    });
+
+    window.addEventListener('load', () => {
+      updateLayout();
+      const isMobile = AFRAME.utils.device.isMobile();
+      document.getElementById('mainCamera').setAttribute('look-controls', isMobile ? 'enabled: false' : 'enabled: true');
+    });
+
+    window.addEventListener('resize', updateLayout);
   </script>
 
   <style>
@@ -303,7 +300,7 @@
   <div id="button-container">
     <!-- Top Buttons -->
     <div id="menu-buttons">
-      <button class="menu-button Home" clickable onclick="setState('Home')">Home</button>
+      <button class="menu-button Home" clickable onclick="setState('Home626821')">Home</button>
       <button class="menu-button Team" clickable onclick="setState('Team')">Team</button>
       <button class="menu-button About" clickable onclick="setState('About')">About</button>
       <button class="menu-button Contact" clickable onclick="setState('Contact')">Contact</button>
