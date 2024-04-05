@@ -53,9 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showCloseButton: true,
         showCancelButton: true,
         focusConfirm: false,
-        confirmButtonText: `
-          <i class="fa fa-thumbs-up"></i> Great!
-        `,
+        confirmButtonText: `<i class="fa fa-thumbs-up"></i> Great!`,
         confirmButtonAriaLabel: "Thumbs up, great!",
       });
     }
