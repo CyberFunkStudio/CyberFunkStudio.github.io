@@ -1,0 +1,12 @@
+.a-enter-vr.fullscreen .a-enter-vr-button {
+  visibility: hidden;
+}
+
+.menu-button.transparent {
+  opacity: 0.5;
+}
+
+.menu-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
