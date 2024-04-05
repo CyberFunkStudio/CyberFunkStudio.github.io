@@ -112,108 +112,55 @@
       document.getElementById('About-Anna').setAttribute('scale', scale);
     }
 
-    function toggleLookControls() {
+    document.addEventListener('DOMContentLoaded', function () {
       const cameraEl = document.getElementById('mainCamera');
-      const lookControlsEnabled = cameraEl.getAttribute('look-controls').enabled;
-      cameraEl.setAttribute('look-controls', 'enabled', !lookControlsEnabled);
+      
+      cameraEl.setAttribute('look-controls', 'enabled', true);
+      cameraEl.setAttribute('look-controls', 'magicWindowTrackingEnabled', false);
 
-      cameraEl.setAttribute('rotation', '0 0 0');
-    }
+      // here is the function to notify the user to tilt his phone back
+      window.addEventListener('resize', function() {
+        if (!cameraEl) return;
 
-    document.addEventListener('DOMContentLoaded', function () {
-      var sensitivitySlider = document.getElementById('sensitivity');
-      var sensitivityValueDisplay = document.getElementById('sensitivity-value');
-      var cameraEl = document.getElementById('mainCamera');
+        if (window.innerWidth > 600 && AFRAME.utils.device.isMobile()) {
+          var fullScreenDiv = document.createElement('div');
 
-      sensitivitySlider.addEventListener('input', function (evt) {
-        var newSensitivity = parseFloat(evt.target.value);
-        sensitivityValueDisplay.textContent = newSensitivity.toFixed(4);
+          // Set styles to make the div fullscreen, with a green background, and high z-index
+          fullScreenDiv.style.position = 'absolute';
+          fullScreenDiv.style.top = '0';
+          fullScreenDiv.style.left = '0';
+          fullScreenDiv.style.width = '100%';
+          fullScreenDiv.style.height = '100%';
+          fullScreenDiv.style.backgroundColor = 'green';
+          fullScreenDiv.style.zIndex = '9999';
+          fullScreenDiv.style.display = 'flex';
+          fullScreenDiv.style.justifyContent = 'center';
+          fullScreenDiv.style.alignItems = 'center';
+          fullScreenDiv.style.color = 'white';
+          fullScreenDiv.style.fontSize = '24px';
 
-        cameraEl.setAttribute('mouse-flow-controls', 'sensitivity', newSensitivity);
-      });
-    });
+          // Create the h1 element
+          var message = document.createElement('h1');
+          message.textContent = 'Please tilt your phone';
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const rig = document.querySelector('#rig');
-      const camera = document.querySelector('#mainCamera');
-      const isMobile = AFRAME.utils.device.isMobile();
-      const isTablet = AFRAME.utils.device.isTablet();
+          // Add the h1 element to the div
+          fullScreenDiv.appendChild(message);
+          // Add the div to the body of the document, making it visible on the page
+          document.body.appendChild(fullScreenDiv);
 
-      const resetCameraRotation = () => {
-        rig.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-        camera.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-        camera.components['look-controls'].pitchObject.rotation.set(0, 0, 0);
-        camera.components['look-controls'].yawObject.rotation.set(0, 0, 0);
-      };
-
-      if (isMobile || isTablet) {
-        document.querySelectorAll('[clickable]').forEach(entity => {
-          entity.addEventListener('click', function () {
-            camera.setAttribute('look-controls', 'enabled', true);
-          });
-        });
-
-        document.getElementById("lock-button").style.position = "fixed"
-        document.getElementById("lock-button").style.left = "50px"
-        document.getElementById("lock-button").style.bottom = "150px"
-        document.getElementById("lock-button").style.zIndex = "1"
-        camera.setAttribute('look-controls', 'enabled', false);
-      } else {
-        camera.setAttribute('look-controls', 'enabled', true);
-      }
-
-
-    // here is the function to notify the user to tilt his phone back
-    const cameraEl = document.getElementById('mainCamera');
-    window.addEventListener('resize', function() {
-        if (cameraEl) {
-            if( window.innerWidth > 600 && AFRAME.utils.device.isMobile()){
-
-                  var fullScreenDiv = document.createElement('div');
-
-                  // Set styles to make the div fullscreen, with a green background, and high z-index
-                  fullScreenDiv.style.position = 'absolute';
-                  fullScreenDiv.style.top = '0';
-                  fullScreenDiv.style.left = '0';
-                  fullScreenDiv.style.width = '100%';
-                  fullScreenDiv.style.height = '100%';
-                  fullScreenDiv.style.backgroundColor = 'green';
-                  fullScreenDiv.style.zIndex = '9999';
-                  fullScreenDiv.style.display = 'flex';
-                  fullScreenDiv.style.justifyContent = 'center';
-                  fullScreenDiv.style.alignItems = 'center';
-                  fullScreenDiv.style.color = 'white';
-                  fullScreenDiv.style.fontSize = '24px';
-
-                  // Create the h1 element
-                  var message = document.createElement('h1');
-                  message.textContent = 'Please tilt your phone';
-
-                  // Add the h1 element to the div
-                  fullScreenDiv.appendChild(message);
-                  // Add the div to the body of the document, making it visible on the page
-                  document.body.appendChild(fullScreenDiv);
-
-            }else{
-              location.reload();
-            }
-            cameraEl.setAttribute('aspect', window.innerWidth / window.innerHeight);
-            // Adjust other scene properties as necessary
+        } else {
+          location.reload();
         }
-      });
-    });
 
-    window.addEventListener('load', () => {
-      updateLayout();
-      const isMobile = AFRAME.utils.device.isMobile();
-      document.getElementById('mainCamera').setAttribute('look-controls', isMobile ? 'enabled: false' : 'enabled: true');
+        cameraEl.setAttribute('aspect', window.innerWidth / window.innerHeight);
+        // Adjust other scene properties as necessary
+      });
     });
 
     window.addEventListener('resize', updateLayout);
   </script>
 
   <style>
-
     #button-container {
       position: fixed;
       top: 10px;
@@ -296,7 +243,6 @@
 </head>
 
 <body>
-
   <div id="button-container">
     <!-- Top Buttons -->
     <div id="menu-buttons">
@@ -313,10 +259,6 @@
     by the element itself.
   </div>
   <div id="overlay"></div>
-
-  <div id="lock-button" class="flex">
-    <button onclick="toggleLookControls()">VR</button>
-  </div>
 
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"
     background="color: #b4cdc2">
