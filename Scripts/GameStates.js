@@ -1,3 +1,6 @@
+// Here we can define specific values for our game states. 
+
+// this defines which properties we will define in each game state
 class GameState {
     constructor(name, position, rotation, textfieldIds, rigRotation) {
         this.name = name;
@@ -7,11 +10,13 @@ class GameState {
         this.rigRotation = rigRotation;
     }
 
+    //Returns the name of the active Game State
     toString() {
         return this.name;
     }
 }
 
+// here are the actual values for the Game State properties
 class GameStates {
     static Home = new GameState('Home', { x: 0, y: 0.5, z: 6 }, { x: 0, y: 0, z: 0 }, [], {});
     static About = new GameState('About', { x: 0, y: 0.5, z: 6 }, { x: 0, y: 0, z: 0 }, ['About-Textfield'], {});
@@ -19,6 +24,7 @@ class GameStates {
     static Contact = new GameState('Contact', { x: -1.3, y: 2.7, z: 2 }, { x: 0, y: -30, z: 0 }, ['Contact-Textfield', 'Mail-Textfield', 'Telephone-Textfield'], {});
     static Product = new GameState('Products', { x: 0.8, y: -0.1, z: 2.3 }, { x: 0, y: 20, z: 0 }, ['Product-1', 'Product-2', 'Product-3', 'Product-4', 'LockedProduct-1', 'LockedProduct-2', 'LockedProduct-3', 'LockedProduct-4'], {});
 
+    // checks if the Game State name actually exists in our list of game states. if yes, it return the name of the game state. if no, it returns an error message 
     static Matching(name) {
         var values = Object.values(GameStates);
 

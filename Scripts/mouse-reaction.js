@@ -1,3 +1,5 @@
+//This document makes clickable A-Textfields pop a little when the mouse hovers above it
+
 AFRAME.registerComponent('mouse-reaction', {    
     init: function() {
         var el = this.el;
