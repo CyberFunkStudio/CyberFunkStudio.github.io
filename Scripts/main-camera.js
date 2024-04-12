@@ -7,10 +7,6 @@ AFRAME.registerComponent('main-camera', {
         // sets field of view value depending on platform (fov mobile : fov desktop)
         var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
 
-        this.initialRotationCounter = 0;
-        this.initialRotationMax = 30;
-        this.rotateTowardsStep_rad = 0.015;
-
         this.cameraEntity = this.el.children[0];
         this.cameraObject = this.cameraEntity.components['camera'].camera;
         
