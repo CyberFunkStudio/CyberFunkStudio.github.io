@@ -1,3 +1,5 @@
+// This document let's us click on the phone- and email-textfields. It then allows us to directly call the number or the write an email from the email client
+
 AFRAME.registerComponent('click-listener', {
     schema: {
         action: { type: 'string' }

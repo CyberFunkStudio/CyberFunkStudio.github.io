@@ -3,6 +3,7 @@
 
 <head>
   <title>Template</title>
+  <!--basic information about this html-Document-->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -71,11 +72,14 @@
 
     window.addEventListener('resize', updateLayout);
 
+    //Updating the game state
     function setState(state) {
       document.getElementById('scene').components['game-state'].setState(state);
       updateMenuButtonState(state);
     };
 
+    // Call updateMenuButtonState with initial state set to 'Home' on initial page load
+    // Sets active menu button as transparent
     function updateMenuButtonState(activeState) {
       const buttons = document.getElementById("menu-buttons");
 
@@ -89,6 +93,11 @@
       });
     }
 
+    // Setting the position of A-Frame Textfields according to screen format: 
+
+    // Call updateLayout function on initial page load
+    // Registers window format changes. When a change occurs it triggers the updateLayout function
+    // Defines mobile window format. triggers layout update functions of A-Frame Textfields (for mobile)
     function updateLayout() {
       const isMobile = window.innerWidth <= 800; // Assuming 800px as a breakpoint
       const positions = {
@@ -110,10 +119,8 @@
 
       updateMaxxAndAnnaTextFields(isMobile);
 
-      // Choose the set of positions based on whether it's mobile or desktop
       const chosenPositions = isMobile ? positions.mobile : positions.desktop;
 
-      // Update the positions of each entity
       for (const id in chosenPositions) {
         const entity = document.getElementById(id);
         if (entity) {
@@ -122,6 +129,7 @@
       }
     }
 
+    // moves the Contact Textfield to one of two positions along the X axis.
     function updateContactTextFields(isMobile) {
       const desktopX = '-0.3';
       const mobileX = '-0.8';
@@ -133,6 +141,7 @@
       document.getElementById('Telephone-Textfield').setAttribute('position', newX + ' 4.3 1.3');
     }
 
+    // moves the Maxx and Anna Textfields to one of two positions and scale values
     function updateMaxxAndAnnaTextFields(isMobile) {
       const positionMaxx = isMobile ? '-1.3 3.0 -1.65' : '-1 2.6 -0.9';
       const positionAnna = isMobile ? '-1.35 2.4 -1.15' : '-1.35 2.6 -1.9';
@@ -229,8 +238,8 @@
 </head>
 
 <body>
+  <!-- Menu-Buttons -->
   <div id="button-container">
-    <!-- Top Buttons -->
     <div id="menu-buttons">
       <button class="menu-button Home" clickable onclick="setState('Home')">Home</button>
       <button class="menu-button Team" clickable onclick="setState('Team')">Team</button>
@@ -246,8 +255,10 @@
   </div>
   <div id="overlay"></div>
 
+  <!-- Loading the A-Scene [3D]-->
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"
     background="color: #b4cdc2">
+    <!-- load and place 3D Model -->
     <a-assets>
       <a-asset-item id="karton-model" timeout="10000" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item>
     </a-assets>
@@ -256,35 +267,36 @@
     <!-- DEBUG LOG [keep] -->
     <!-- <a-log position="6.5 0 -4.5" scale="10 10 10" rotation="0 -10 0" max="1"></a-log> -->
 
-    <!--camera animation-->
+    <!--camera animation rig. By animating the rotation of this, we can give the camera transitions a curved path-->
     <a-entity id="rig">
       <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="acceleration:100">
+        <!-- this is our actual camera -->
         <a-camera id="mainCamera"></a-camera>
       </a-entity>
     </a-entity>
 
-    <!-- About-TextField. Should appear when about button is clicked -->
+    <!-- About-TextField. appears when about button is clicked -->
     <a-entity id='About-Textfield'
       text="value: About-Text\n A brief summary of\n what we do and why; color: #000; align: center; width: 3"
       geometry="primitive: plane; height: 2; width: 2.5" material="color: #FFF" position="0 2.35 2.3" scale="1 1 1"
       visible="true" text-field>
     </a-entity>
 
-    <!-- Maxx-TextField -->
+    <!-- Maxx-TextField. appears when team button is clicked -->
     <a-entity id='About-Maxx'
       text="value: Maxx-Text\n A brief summary of\n Maxx' persona; color: #000; align: center; width: 0.7"
       geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.3 3.2 -1.65"
       rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
     </a-entity>
 
-    <!-- Anna-TextField -->
+    <!-- Anna-TextField. appears when team button is clicked -->
     <a-entity id='About-Anna'
       text="value: Anna-Text\n A brief summary of\n Anna's persona; color: #000; align: center; width: 0.7"
       geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.35 2.4 -1.15"
       rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
     </a-entity>
 
-    <!-- Contact-TextField. Should appear when contact button is clicked -->
+    <!-- Contact-TextField. appears when contact button is clicked -->
     <a-entity id='Contact-Textfield'
       text="value: short statement\n to facilitate contact; color: #000; align: center; width: 1"
       geometry="primitive: plane; height: 0.2; width: 0.5" material="color: #FFF" position="-0.5 4.55 1.3"
@@ -304,7 +316,7 @@
       rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: call">
     </a-entity>
 
-    <!-- Product-Buttons. They name the displayed products and will open a description textfield on click -->
+    <!-- Product-Buttons. They name the displayed products and open a textfield on click -->
     <a-entity id='Product-1' class="products Raycastable" text="value: Product 1; color: #000; align: center; width: 0.5"
       geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.3 1.5 1.35"
       rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
@@ -315,7 +327,6 @@
       rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
     </a-entity>
 
-    <!-- locked products -->
     <a-entity id='Product-3' class="products Raycastable"
       text="value: Product 3; color: #000; align: center; width: 0.5"
       geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.3 1.3 1.35"

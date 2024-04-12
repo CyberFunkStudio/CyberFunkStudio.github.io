@@ -2,6 +2,7 @@
   visibility: hidden;
 }
 
+/* transpartency value for selected menu-buttons*/
 .menu-button.transparent {
   opacity: 0.5;
 }

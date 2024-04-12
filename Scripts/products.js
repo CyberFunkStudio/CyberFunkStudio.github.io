@@ -1,3 +1,5 @@
+// this document creates the product-popup-windows, defines their content and how they can be interacted with
+
 document.addEventListener('DOMContentLoaded', function() {
     // Function to log the id of the clicked entity
     function showProduct() {

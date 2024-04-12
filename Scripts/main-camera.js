@@ -1,5 +1,10 @@
+//This document handles the main camera. it sets its inital position and rotation. it also handles the camera transitions
+
 AFRAME.registerComponent('main-camera', {
+    
+    //setting up main camera component
     init: function() {
+        // sets field of view value depending on platform (fov mobile : fov desktop)
         var fov = AFRAME.utils.device.isMobile() ? 80 : 50;
 
         this.initialRotationCounter = 0;
@@ -13,6 +18,7 @@ AFRAME.registerComponent('main-camera', {
         this.cameraEntity.setAttribute('fov', fov);
     },
     
+    // allows us to intervene in an ongoing animation
     tick: function() {
         if (this.initialRotationCounter++ < this.initialRotationMax)
         {
@@ -28,6 +34,8 @@ AFRAME.registerComponent('main-camera', {
         this.cameraObject.quaternion.rotateTowards(quaternion.invert(), this.rotateTowardsStep_rad);
     },
 
+
+// setting camera position, rotation and animation duration (values defined in GAMESTATES.js)
     setCameraPosition: function(x, y, z, rx, ry, rz, duration) {
         var wrapper = this.el;
 
@@ -47,6 +55,7 @@ AFRAME.registerComponent('main-camera', {
         this.resetLookControls(duration);
     },
 
+    //resetting the look control to 0 at each game state position. this ensures that the users camera interaction works as intended in each game state
     resetLookControls: function(duration) {
         var lookControls = this.cameraEntity.components['look-controls'];
 
