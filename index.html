@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <title>Template</title>
   <!--basic information about this html-Document-->
+  <title>Cyber Funk Studio Website</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -108,110 +108,24 @@
       document.getElementById('About-Anna').setAttribute('scale', scale);
     }
   </script>
-
-  <style>
-    #button-container {
-      position: fixed;
-      top: 10px;
-      width: 100%;
-      z-index: 1;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    #button-container button {
-      flex: 1;
-      margin: 0 70px;
-      height: 80px;
-    }
-
-    @media (max-width: 600px) {
-      #button-container {
-        flex-direction: column;
-        bottom: 10px; /* This positions the button container at the bottom for mobile */
-        top: auto; /* Optional: Explicitly override any top value if necessary */
-        height: auto; /* Adjust height to be auto or a specific value that fits your design */
-      }
-
-      #menu-buttons {
-        flex-direction: row;
-        margin-bottom: 60px;
-      }
-
-      #button-container button {
-        margin: 0 6px;
-        height: 60px;
-      }
-    }
-    
-    #controls {
-      position: fixed;
-      z-index: 1;
-    }
-    #menu-button {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 2;
-    }
-
-    #overlay {
-      display: none;
-      position: fixed;
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      opacity: 0.5;
-      z-index: 99999;
-    }
-
-    #product-1-popup {
-      display: none;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      width: 300px;
-      height: 150px;
-      margin-top: -75px;
-      margin-left: -150px;
-      background: #FFFFFF;
-      border: 2px solid #000;
-      z-index: 100000;
-    }
-
-    #menu-buttons {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      justify-content: space-between;
-    }
-  </style>
 </head>
 
 <body>
   <!-- Menu-Buttons -->
   <div id="button-container">
     <div id="menu-buttons">
-      <button class="menu-button Home" clickable onclick="setState('Home')">Home</button>
       <button class="menu-button Team" clickable onclick="setState('Team')">Team</button>
       <button class="menu-button About" clickable onclick="setState('About')">About</button>
+      <button class="menu-button Home" clickable onclick="setState('Home')">Home</button>
       <button class="menu-button Contact" clickable onclick="setState('Contact')">Contact</button>
-      <button class="menu-button Products" clickable onclick="setState('Products')">Product</button>
+      <button class="menu-button Products" clickable onclick="setState('Products')">Products</button>
     </div>
   </div>
-
-  <div id="product-1-popup">
-    Here add some amount of text that should be easily readable on any device. The formatting should ideally be handled
-    by the element itself.
-  </div>
-  <div id="overlay"></div>
-
+  
   <!-- Loading the A-Scene [3D]-->
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"
     background="color: #b4cdc2">
+
     <!-- load and place 3D Model -->
     <a-assets>
       <a-asset-item id="karton-model" timeout="10000" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item>
@@ -239,7 +153,7 @@
     <!-- Maxx-TextField. appears when team button is clicked -->
     <a-entity id='About-Maxx'
       text="value: Maxx-Text\n A brief summary of\n Maxx' persona; color: #000; align: center; width: 0.7"
-      geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.3 3.2 -1.65"
+      geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.3 2.7 -1.65"
       rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
     </a-entity>
 
@@ -257,17 +171,17 @@
       rotation="0 -30 0" scale="1 1 1" visible="false" text-field>
     </a-entity>
 
-    <!-- e-mail textfield. This will be a link -->
-    <a-entity id='Mail-Textfield' class="Raycastable" text="value: e-mail link; color: #000; align: center; width: 1"
+    <!-- e-mail textfield. This is a link -->
+    <a-entity id='Mail-Textfield' class="Raycastable" text="value: info@cyberfunk.studio; color: #000; align: center; width: 1"
       geometry="primitive: plane; height: 0.08; width: 0.5" material="color: #FFF" position="-0.5 4.39 1.3"
-      rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: email">
+      rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: email" mouse-reaction text-field>
     </a-entity>
 
-    <!-- telephone textfield. This will be a link -->
+    <!-- telephone textfield. This is a link -->
     <a-entity id='Telephone-Textfield' class="Raycastable"
-      text="value: telephone-number link; color: #000; align: center; width: 1"
+      text="value: +41 77 532 05 31; color: #000; align: center; width: 1"
       geometry="primitive: plane; height: 0.08; width: 0.5" material="color: #FFF" position="-0.5 4.3 1.3"
-      rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: call">
+      rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: call" mouse-reaction text-field>
     </a-entity>
 
     <!-- Product-Buttons. They name the displayed products and open a textfield on click -->

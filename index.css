@@ -11,3 +11,84 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+/* Buttons and placement */
+#button-container {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#button-container button {
+  flex: 1;
+  margin: 0 70px;
+  height: 80px;
+}
+
+@media (max-width: 600px) {
+  #button-container {
+    flex-direction: column;
+    bottom: 10px; /* This positions the button container at the bottom for mobile */
+    top: auto; /* Optional: Explicitly override any top value if necessary */
+    height: auto; /* Adjust height to be auto or a specific value that fits your design */
+  }
+
+  #menu-buttons {
+    flex-direction: row;
+    margin-bottom: 60px;
+  }
+
+  #button-container button {
+    margin: 0 6px;
+    height: 60px;
+  }
+}
+
+#controls {
+  position: fixed;
+  z-index: 1;
+}
+#menu-button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+  z-index: 99999;
+}
+
+#product-1-popup {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 150px;
+  margin-top: -75px;
+  margin-left: -150px;
+  background: #FFFFFF;
+  border: 2px solid #000;
+  z-index: 100000;
+}
+
+#menu-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
