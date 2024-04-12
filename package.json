@@ -1,0 +1,25 @@
+{
+  "name": "cfs-website",
+  "version": "0.1.0",
+  "description": "Website for CyberFunk.studio",
+  "main": "index.html",
+  "scripts": {
+    "start": "budo --live --verbose --port 3000 --open",
+    "deploy": "ghpages",
+    "ghpages": "ghpages"
+  },
+  "devDependencies": {
+    "budo": "^7.0.0",
+    "ghpages": "0.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CyberFunkStudio/cfs-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CyberFunkStudio/cfs-website/issues"
+  },
+  "homepage": "https://github.com/CyberFunkStudio/cfs-website#readme"
+}
