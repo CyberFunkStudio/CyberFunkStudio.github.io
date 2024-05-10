@@ -13,6 +13,12 @@ AFRAME.registerComponent('click-listener', {
             }else if(action === 'email'){
                 window.location.href = 'mailto:info@cyberfunk.studio';
             }
+            else if (action === 'Anna') {
+                setState('Anna');
+            }
+            else if (action === 'Maxx') {
+                setState('Maxx');
+            }
         });
     }
 });
