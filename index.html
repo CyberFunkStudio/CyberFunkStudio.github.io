@@ -72,7 +72,12 @@
       <img id="ContactText-Texture" src="Models/24-05-06_contact-text-texture_V01.png">
       <img id="AboutText-Texture" src="Models/24-05-08_about-text_V02.png">
     </a-assets>
-    <a-entity scale="10 10 10" position="0 0 0" rotation="0 -70 0" gltf-model="#karton-model"></a-entity>
+  
+    <!--Basic Scene Setup Assets-->
+    <a-entity scale="9.7 9.7 9.7" position="-0.5 -2 0" rotation="0 -10 0" gltf-model="#karton-model" animation-mixer></a-entity>
+    <a-entity scale="9.7 9.7 9.7" position="-0.5 -2.2 0" rotation="0 -10 0" gltf-model="#Logo-model" material="side: front" animation-mixer></a-entity>
+    <a-light type="point" color="#FF00FF" intensity="10" position="2 3.07 1.8" distance="1.3"></a-light>
+    <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
 
     <!-- DEBUG LOG [keep] -->
     <!-- <a-log position="6.5 0 -4.5" scale="10 10 10" rotation="0 -10 0" max="1"></a-log> -->
