@@ -12,6 +12,10 @@
   cursor: not-allowed;
 }
 
+.swal2-confirm:focus {
+  outline: 3px solid #F2BC1B; /* Or any color that suits your design */
+}
+
 .roboto-thin {
   font-family: "Roboto", sans-serif;
   font-weight: 100;

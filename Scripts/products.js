@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         focusConfirm: false,
         confirmButtonText: `<i class="fa fa-thumbs-up"></i> Great!`,
         confirmButtonAriaLabel: "Thumbs up, great!",
+        confirmButtonColor: `#F2BC1B`,
       });
     }
 
