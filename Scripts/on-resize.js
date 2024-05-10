@@ -17,12 +17,52 @@
  // moves the Contact Textfield to one of two positions along the X axis.
  function updateContactTextFields(isMobile) {
    const desktopX = '-0.3';
-   const mobileX = '-0.8';
+   const mobileX = '-0.75';
    const newX = isMobile ? mobileX : desktopX;
 
-   document.getElementById('Contact-Textfield').setAttribute('position', newX + ' 4.55 1.3');
-   document.getElementById('Mail-Textfield').setAttribute('position', newX + ' 4.39 1.3');
-   document.getElementById('Telephone-Textfield').setAttribute('position', newX + ' 4.3 1.3');
+   //contact-Text Position
+   const desktopXcontact = '-0.43';
+   const mobileXcontact ='-0.7';
+   const newXcontact = isMobile ? mobileXcontact : desktopXcontact;
+
+   const desktopYcontact = '4.55';
+   const mobileYcontact ='4.65';
+   const newYcontact = isMobile ? mobileYcontact : desktopYcontact;
+
+   const desktopZcontact = '-0.6';
+   const mobileZcontact = '-0.6';
+   const newZcontact = isMobile ? mobileZcontact : desktopZcontact;
+
+   //Mail button Position
+   const desktopXmail = '-0.3';
+   const mobileXmail = '-0.8';
+   const newXmail = isMobile ? mobileXmail : desktopXmail;
+
+   const desktopYmail = '4.23';
+   const mobileYmail = '4.45';
+   const newYmail = isMobile ? mobileYmail : desktopYmail;
+
+   const desktopZmail = '-0.3';
+   const mobileZmail = '-0.75';
+   const newZmail = isMobile ? mobileZmail : desktopZmail;
+
+   //Telephone Button Position
+   const desktopXtele = '-0.3';
+   const mobileXtele = '-0.75';
+   const newXtele = isMobile ? mobileXtele : desktopXtele;
+   
+   const desktopYtele = '4.3';
+   const mobileYtele = '4.33';
+   const newYtele = isMobile ? mobileYtele : desktopYtele;
+
+   const desktopZtele = '-0.6';
+   const mobileZtele = '-0.72';
+   const newZtele = isMobile ? mobileZtele : desktopZtele;
+
+
+   document.getElementById('Contact-Textfield').setAttribute('position', newXcontact + ' ' + newYcontact + ' ' + newZcontact);
+   document.getElementById('Mail-Textfield').setAttribute('position', newXmail + ' ' + newYmail + ' ' + newZmail);
+   document.getElementById('Telephone-Textfield').setAttribute('position', newXtele + ' ' + newYtele + ' ' + newZtele);
  }
 
  // moves the Maxx and Anna Textfields to one of two positions and scale values
