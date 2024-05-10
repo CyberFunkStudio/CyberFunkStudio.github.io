@@ -9,9 +9,8 @@
  function updateLayout() {
    const mobile = isMobile();
 
-   updateContactTextFields(isMobile);
-
-   updateMaxxAndAnnaTextFields(isMobile);
+   updateContactTextFields(mobile);
+  //updateMaxxAndAnnaTextFields(isMobile);
 
  }
 
@@ -28,13 +27,15 @@
 
  // moves the Maxx and Anna Textfields to one of two positions and scale values
  function updateMaxxAndAnnaTextFields(isMobile) {
-   const positionMaxx = isMobile ? '-1.3 3.0 -1.65' : '-1 2.6 -0.9';
-   const positionAnna = isMobile ? '-1.35 2.4 -1.15' : '-1.35 2.6 -1.9';
-   const scale = isMobile ? '0.8 0.8 0.8' : '1 1 1';
+  /*
+  const positionMaxx = isMobile ? '-1.3 3.0 -1.65' : '-0.269 2.28 -1.43';
+   const positionAnna = isMobile ? '-1.35 2.4 -1.15' : '-0.435 2.27 -1.936';
+   const scale = isMobile ? '1 1 1' : '1 1 1';
 
    document.getElementById('About-Maxx').setAttribute('position', positionMaxx);
    document.getElementById('About-Maxx').setAttribute('scale', scale);
 
    document.getElementById('About-Anna').setAttribute('position', positionAnna);
    document.getElementById('About-Anna').setAttribute('scale', scale);
+   */
  }
