@@ -40,15 +40,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
       Swal.fire({
-        title: "<strong>All About</strong> "+event.target.id,
         width: "80%",
         html: product_text,
-        showCloseButton: true,
-        showCancelButton: true,
         focusConfirm: false,
         confirmButtonText: `<i class="fa fa-thumbs-up"></i> Great!`,
         confirmButtonAriaLabel: "Thumbs up, great!",
         confirmButtonColor: `#F2BC1B`,
+        background:`rgba(255, 255, 255, 0.85)`,
+        customClass: {
+          container:`roboto-regular`,
+        },
       });
     }
 
