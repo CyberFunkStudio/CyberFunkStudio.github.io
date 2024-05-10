@@ -77,9 +77,9 @@
 
     <!--camera animation rig. By animating the rotation of this, we can give the camera transitions a curved path-->
     <a-entity id="rig">
-      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="acceleration:100">
+      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="enabled: false">
         <!-- this is our actual camera -->
-        <a-camera id="mainCamera"></a-camera>
+        <a-camera id="mainCamera" look-controls="magicWindowTrackingEnabled: false"></a-camera>
       </a-entity>
     </a-entity>
 
