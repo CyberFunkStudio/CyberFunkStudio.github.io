@@ -98,14 +98,22 @@
 
 #button-container button {
   flex: 1;
-  margin: 0 70px;
-  height: 80px;
+  margin: 0 80px;
+  height: 70px;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  /*border: 2px solid white;
+  /*border-radius: 10px;*/
 }
 
 @media (max-width: 600px) {
   #button-container {
     flex-direction: column;
-    bottom: 10px; /* This positions the button container at the bottom for mobile */
+    bottom: -20px; /* This positions the button container at the bottom for mobile */
     top: auto; /* Optional: Explicitly override any top value if necessary */
     height: auto; /* Adjust height to be auto or a specific value that fits your design */
   }
@@ -118,6 +126,10 @@
   #button-container button {
     margin: 0 6px;
     height: 60px;
+  }
+
+  #button-container button {
+    font-size: 14px; /* Smaller font size for mobile */
   }
 }
 
