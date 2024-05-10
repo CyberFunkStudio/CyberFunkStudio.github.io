@@ -14,6 +14,12 @@
   <!-- <script src="https://unpkg.com/aframe-log-component/dist/aframe-log-component.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/20.0.0/tween.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
   <!-- Internal sources -->
   <script src="Scripts/game-state.js"></script>
@@ -25,7 +31,6 @@
   <script src="Scripts/click-listener.js"></script>
   <script src="Scripts/on-resize.js"></script>
   <script src="Scripts/on-pageload.js"></script>
-  <!-- <script src="Scripts/tilt-back-screen.js"></script> -->
 
   <script>
     //Updating the game state
@@ -41,7 +46,7 @@
   <div id="button-container">
     <div id="menu-buttons">
       <button class="menu-button Team" clickable onclick="setState('Team')">Team</button>
-      <button class="menu-button About" clickable onclick="setState('About')">About</button>
+      <button class="menu-button-About" id="About-button" clickable onclick="setState('About')">About</button>
       <button class="menu-button Home" clickable onclick="setState('Home')">Home</button>
       <button class="menu-button Contact" clickable onclick="setState('Contact')">Contact</button>
       <button class="menu-button Products" clickable onclick="setState('Products')">Products</button>
@@ -50,88 +55,116 @@
   
   <!-- Loading the A-Scene [3D]-->
   <a-scene id="scene" cursor="rayOrigin: mouse" game-state raycaster="objects: [data-raycastable]"
-    background="color: #b4cdc2">
+    background="color: #000000">
+
+    <a-sky src="Models/24-05-09_Skybox_V05.png" rotation="0 -90 0"></a-sky>
 
     <!-- load and place 3D Model -->
     <a-assets>
-      <a-asset-item id="karton-model" timeout="10000" src="Models/23-10-16_DM_house-model-karton_V01.glb"></a-asset-item>
+      <a-asset-item id="karton-model" timeout="10000" src="Models/24-05-03_cfs-website-model_V14.7.glb"></a-asset-item>
+      <a-asset-item id="Logo-model" timeout="10000" src="Models/24-05-03_cfs-website-logo-model_V14.3.glb"></a-asset-item>
+      <img id="MaxxButton-Texture" src="Models/24-04-30_maxx-button_V01.png">
+      <img id="MaxxText-Texture" src="Models/24-05-06_team-textplanes_Maxx_V07.png">
+      <img id="AnnaButton-Texture" src="Models/24-04-30_anna-button_V01.png">
+      <img id="AnnaText-Texture" src="Models/24-05-06_team-textplanes_Anna_V03.png">
+      <img id="MailButton-Texture" src="Models/24-04-30_mail-button_V01.png">
+      <img id="TelephoneButton-Texture" src="Models/24-04-30_phone-button_V01.png">
+      <img id="ExpandWeb-Texture" src="Models/24-04-30_expand-web-button_V01.png">
+      <img id="ExpandPrint-Texture" src="Models/24-04-30_expand-print-button_V01.png">
+      <img id="ContactText-Texture" src="Models/24-05-06_contact-text-texture_V01.png">
+      <img id="AboutText-Texture" src="Models/24-05-08_about-text_V02.png">
     </a-assets>
-    <a-entity scale="10 10 10" position="0 0 0" rotation="0 -70 0" gltf-model="#karton-model"></a-entity>
+  
+    <!--Basic Scene Setup Assets-->
+    <a-entity scale="9.7 9.7 9.7" position="-0.5 -2 0" rotation="0 -10 0" gltf-model="#karton-model" animation-mixer></a-entity>
+    <a-entity scale="9.7 9.7 9.7" position="-0.5 -2.2 0" rotation="0 -10 0" gltf-model="#Logo-model" material="side: front" animation-mixer></a-entity>
+    <a-light type="point" color="#FF00FF" intensity="10" position="2 3.07 1.8" distance="1.3"></a-light>
+    <a-light type="ambient" color="#ffffff" intensity="0.6"></a-light>
 
     <!-- DEBUG LOG [keep] -->
     <!-- <a-log position="6.5 0 -4.5" scale="10 10 10" rotation="0 -10 0" max="1"></a-log> -->
 
     <!--camera animation rig. By animating the rotation of this, we can give the camera transitions a curved path-->
     <a-entity id="rig">
-      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="acceleration:100">
+      <a-entity id="mainCameraWrapper" position="0 0.5 6" main-camera wasd-controls="enabled: false">
         <!-- this is our actual camera -->
-        <a-camera id="mainCamera"></a-camera>
+        <a-camera id="mainCamera" look-controls="magicWindowTrackingEnabled: false"></a-camera>
       </a-entity>
     </a-entity>
 
-    <!-- About-TextField. appears when about button is clicked -->
-    <a-entity id='About-Textfield'
-      text="value: About-Text\n A brief summary of\n what we do and why; color: #000; align: center; width: 3"
-      geometry="primitive: plane; height: 2; width: 2.5" material="color: #FFF" position="0 2.35 2.3" scale="1 1 1"
+    <!-- About -->
+    <a-plane id='About-CFS'
+      position="-1.2 1.65 1.45" rotation="0 25 0" height="0.675" width="0.5" scale="1 1 1"
+      src="#AboutText-Texture"
+      material="transparent: true"
       visible="true" text-field>
-    </a-entity>
+    </a-plane>
 
-    <!-- Maxx-TextField. appears when team button is clicked -->
-    <a-entity id='About-Maxx'
-      text="value: Maxx-Text\n A brief summary of\n Maxx' persona; color: #000; align: center; width: 0.7"
-      geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.3 2.7 -1.65"
-      rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
-    </a-entity>
+    <!-- Maxx -->
+    <a-plane id='About-Maxx' class="Raycastable"
+      position="-0.269 2.28 -1.43" rotation="0 -70 0" height="0.07" width="0.15" scale="1 1 1" 
+      src="#MaxxButton-Texture" 
+      material="transparent: true"
+      visible="true" mouse-reaction text-field click-listener="action: Maxx">
+    </a-plane>
 
-    <!-- Anna-TextField. appears when team button is clicked -->
-    <a-entity id='About-Anna'
-      text="value: Anna-Text\n A brief summary of\n Anna's persona; color: #000; align: center; width: 0.7"
-      geometry="primitive: plane; height: 0.5; width: 0.3" material="color: #FFF" position="-1.35 2.4 -1.15"
-      rotation="0 -70 0" scale="0.8 0.8 0.8" visible="true" text-field>
-    </a-entity>
+    <a-plane id="Maxx-Text"
+      position="-0.8 2.54 -1.28" rotation="0 -103 0" width="1.8" height="2" scale="0.24 0.24 0.24"
+      src="#MaxxText-Texture" 
+      visible="false" material="transparent: true" text-field>
+    </a-plane>
 
-    <!-- Contact-TextField. appears when contact button is clicked -->
-    <a-entity id='Contact-Textfield'
-      text="value: short statement\n to facilitate contact; color: #000; align: center; width: 1"
-      geometry="primitive: plane; height: 0.2; width: 0.5" material="color: #FFF" position="-0.5 4.55 1.3"
-      rotation="0 -30 0" scale="1 1 1" visible="false" text-field>
-    </a-entity>
+    <!-- Anna -->
+    <a-plane id='About-Anna' class="Raycastable"
+      position="-0.435 2.27 -1.936" rotation="0 -70 0" height="0.07" width="0.15" scale="0.9 0.9 0.9"
+      src="#AnnaButton-Texture" 
+      material="transparent: true"
+      visible="true" mouse-reaction text-field click-listener="action: Anna">
+    </a-plane>
+
+    <a-plane id="Anna-Text"
+      position="-0.7 2.5 -2.15" rotation="0 -43 0" width="1.8" height="2" scale="0.37 0.37 0.37"
+      src="#AnnaText-Texture" 
+      visible="false" material="transparent: true" text-field>
+    </a-plane>
+
+    <!-- Contact -->
+    <a-plane id='Contact-Textfield'
+      position="-0.5 4.7 1.3" rotation="-15 -22 0" height="0.25" width="1.22735" scale="0.75 0.75 0.75"
+      src="#ContactText-Texture"
+      visible="false" material="transparent: true" text-field>
+    </a-plane>
 
     <!-- e-mail textfield. This is a link -->
-    <a-entity id='Mail-Textfield' class="Raycastable" text="value: info@cyberfunk.studio; color: #000; align: center; width: 1"
-      geometry="primitive: plane; height: 0.08; width: 0.5" material="color: #FFF" position="-0.5 4.39 1.3"
-      rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: email" mouse-reaction text-field>
-    </a-entity>
+    <a-plane id='Mail-Textfield' class="Raycastable"
+      position="-0.5 4.39 1.3" rotation="-15 -22 0" height="0.08" width="0.5" scale="1 1 1"
+      src="#MailButton-Texture" 
+      material="transparent: true"
+      visible="false" click-listener="action: email" mouse-reaction text-field>
+    </a-plane>
 
     <!-- telephone textfield. This is a link -->
-    <a-entity id='Telephone-Textfield' class="Raycastable"
-      text="value: +41 77 532 05 31; color: #000; align: center; width: 1"
-      geometry="primitive: plane; height: 0.08; width: 0.5" material="color: #FFF" position="-0.5 4.3 1.3"
-      rotation="0 -30 0" scale="1 1 1" visible="false" text-field click-listener="action: call" mouse-reaction text-field>
-    </a-entity>
+    <a-plane id='Telephone-Textfield' class="Raycastable"
+      position="-0.5 4.3 1.3" rotation="-15 -22 0" height="0.08" width="0.5" scale="1 1 1"
+      src="#TelephoneButton-Texture" 
+      material="transparent: true"
+      visible="false" click-listener="action: call" mouse-reaction text-field>
+    </a-plane>
 
     <!-- Product-Buttons. They name the displayed products and open a textfield on click -->
-    <a-entity id='Product-1' class="products Raycastable" text="value: Product 1; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.3 1.5 1.35"
-      rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
-    </a-entity>
+    <a-plane id='Expand Web' class="products Raycastable" 
+      position="0.3 1.5 1.3" rotation="0 20 0" height="0.1" width="0.2" scale="1 1 1"
+      src="#ExpandWeb-Texture" 
+      material="transparent: true"
+      visible="true"  mouse-reaction text-field>
+    </a-plane>
 
-    <a-entity id='Product-2' class="products Raycastable" text="value: Product 2; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.6 1.5 1.20"
-      rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
-    </a-entity>
-
-    <a-entity id='Product-3' class="products Raycastable"
-      text="value: Product 3; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.3 1.3 1.35"
-      rotation="0 20 0" scale="1 1 1" visible="true"  mouse-reaction text-field>
-    </a-entity>
-
-    <a-entity id='Product-4' class="products Raycastable"
-      text="value: Product 4; color: #000; align: center; width: 0.5"
-      geometry="primitive: plane; height: 0.1; width: 0.2" material="color: #FFF" position="0.6 1.3 1.20" scale="1 1 1"
-      rotation="0 20 0" visible="true"  mouse-reaction text-field>
-    </a-entity>
+    <a-plane id='Expand Print' class="products Raycastable"
+      position="0.6 1.5 1.20" rotation="0 20 0" height="0.1" width="0.2" scale="1 1 1" 
+      src="#ExpandPrint-Texture" 
+      material="transparent: true"
+      visible="true"  mouse-reaction text-field>
+    </a-plane>
   </a-scene>
 </body>
 

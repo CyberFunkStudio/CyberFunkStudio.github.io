@@ -1,3 +1,4 @@
+/*why do we have tzhis?*/
 .a-enter-vr.fullscreen .a-enter-vr-button {
   visibility: hidden;
 }
@@ -10,6 +11,82 @@
 .menu-button.disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.swal2-confirm:focus {
+  outline: 3px solid #F2BC1B; /* Or any color that suits your design */
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }
 
 
@@ -26,14 +103,22 @@
 
 #button-container button {
   flex: 1;
-  margin: 0 70px;
-  height: 80px;
+  margin: 0 80px;
+  height: 70px;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  /*border: 2px solid white;
+  /*border-radius: 10px;*/
 }
 
 @media (max-width: 600px) {
   #button-container {
     flex-direction: column;
-    bottom: 10px; /* This positions the button container at the bottom for mobile */
+    bottom: -20px; /* This positions the button container at the bottom for mobile */
     top: auto; /* Optional: Explicitly override any top value if necessary */
     height: auto; /* Adjust height to be auto or a specific value that fits your design */
   }
@@ -47,6 +132,10 @@
     margin: 0 6px;
     height: 60px;
   }
+
+  #button-container button {
+    font-size: 14px; /* Smaller font size for mobile */
+  }
 }
 
 #controls {
@@ -58,32 +147,6 @@
   bottom: 10px;
   right: 10px;
   z-index: 2;
-}
-
-#overlay {
-  display: none;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: 0.5;
-  z-index: 99999;
-}
-
-#product-1-popup {
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 300px;
-  height: 150px;
-  margin-top: -75px;
-  margin-left: -150px;
-  background: #FFFFFF;
-  border: 2px solid #000;
-  z-index: 100000;
 }
 
 #menu-buttons {
