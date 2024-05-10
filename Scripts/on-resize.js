@@ -1,9 +1,13 @@
  // Registers window format changes. When a change occurs it triggers the updateLayout function
  window.addEventListener('resize', updateLayout);
 
+ function isMobile() {
+  return window.innerWidth <= 800; // Adjust breakpoint as necessary
+}
+ 
  // Defines mobile window format. triggers layout update functions of A-Frame Textfields (for mobile)
  function updateLayout() {
-   const isMobile = window.innerWidth <= 800; // Assuming 800px as a breakpoint
+   const mobile = isMobile();
 
    updateContactTextFields(isMobile);
 

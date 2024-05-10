@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
       Swal.fire({
-        width: "80%",
+        width: isMobile() ? "80%" : "50%",
         html: product_text,
         focusConfirm: false,
         confirmButtonText: `<i class="fa fa-thumbs-up"></i> Great!`,
